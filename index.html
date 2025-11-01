@@ -3,123 +3,37 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>DIY Construction Calculator - Full Updated</title>
+<title>DIY Construction Calculator - Fully Integrated</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f5f7fa;
-    margin: 0;
-    padding: 20px;
-    color: #333;
-    box-sizing: border-box;
-  }
-  header {
-    text-align: center;
-    margin-bottom: 20px;
-    color: white;
-    background-color: #2c3e50;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  .container {
-    display: flex;
-    max-width: 1100px;
-    margin: 0 auto;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .sidebar {
-    flex: 1 1 200px;
-    background: #3498db;
-    border-radius: 8px;
-    padding: 10px;
-  }
-  .sidebar button {
-    display: block;
-    width: 100%;
-    margin: 5px 0;
-    padding: 12px;
-    font-size: 1em;
-    border: none;
-    background: #2980b9;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: left;
-  }
-  .sidebar button.active,
-  .sidebar button:hover {
-    background: #1abc9c;
-  }
-  .content {
-    flex: 3 1 700px;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
-  }
-  h2 {
-    margin-top: 0;
-  }
-  .input-group {
-    margin-bottom: 15px;
-    max-width: 400px;
-  }
-  label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 600;
-  }
-  input[type="number"], select {
-    width: calc(100% - 90px);
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    display: inline-block;
-  }
-  select.unit-select {
-    width: 80px;
-    margin-left: 10px;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    vertical-align: middle;
-  }
-  button.calculate-btn {
-    width: 100%;
-    max-width: 400px;
-    padding: 14px;
-    background-color: #e74c3c;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 1.2em;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  button.calculate-btn:hover {
-    background-color: #bf3b2d;
-  }
-  .results {
-    background: #ecf0f1;
-    padding: 15px;
-    border-radius: 8px;
-    max-width: 400px;
-    margin-top: 20px;
-  }
-  .result-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 6px 0;
-    border-bottom: 1px solid #ccc;
-  }
-  .result-item:last-child {
-    border-bottom: none;
-  }
-  .hidden {
-    display: none;
+  body { font-family: Arial, sans-serif; background:#f5f7fa; margin:0; padding:20px; color:#333; box-sizing:border-box; }
+  header { text-align:center; margin-bottom:20px; color:#fff; background:#2c3e50; padding:20px; border-radius:8px; }
+  .container { display:flex; max-width:1100px; margin:0 auto; gap:20px; flex-wrap:wrap; }
+  .sidebar { flex:1 1 200px; background:#3498db; border-radius:8px; padding:10px; min-width:210px;}
+  .sidebar button { display:block; width:100%; margin:5px 0; padding:12px; font-size:1em; border:none; background:#2980b9; color:#fff; border-radius:5px; cursor:pointer; text-align:left;}
+  .sidebar button.active, .sidebar button:hover { background:#1abc9c; }
+  .content { flex:3 1 700px; background:#fff; padding:20px; border-radius:8px; box-shadow: 0 0 10px rgba(0,0,0,.1); min-width:340px; }
+  h2 { margin-top:0; }
+  .input-group { margin-bottom:15px; max-width:400px;}
+  label { display:block; margin-bottom:6px; font-weight:600; }
+  input[type=number], select { width:100%; padding:8px; border-radius:4px; border:1px solid #ccc; box-sizing:border-box;}
+  button.calculate-btn { width:100%; max-width:400px; padding:14px; background:#e74c3c; border:none; border-radius:8px; color:#fff; font-size:1.2em; cursor:pointer; margin-top:10px;}
+  button.calculate-btn:hover { background:#bf3b2d;}
+  button.back-home { margin-top:16px; background:#2c3e50; color:#fff; border-radius:6px; padding:10px 20px; cursor:pointer; border:none;}
+  button.back-home:hover { background:#24405a; }
+  .results { background:#ecf0f1; padding:15px; border-radius:8px; max-width:400px; margin-top:20px;}
+  .result-item { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #ccc;}
+  .result-item:last-child { border-bottom:none; }
+  .hidden { display:none; }
+  .home-page { background:#fff; border-radius:8px; padding:32px 40px; margin:0 auto 24px; box-shadow: 0 0 12px #bbb2; max-width:480px; text-align:center;}
+  .home-page h1 { margin-bottom:5px;}
+  .home-page p { margin-bottom:18px;}
+  .home-tiles { display:flex; flex-direction:column; gap:16px; align-items:stretch;}
+  .home-tiles button { font-size:1.15em; padding:16px; background:#2980b9; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:600;}
+  .home-tiles button:hover { background:#1abc9c;}
+  @media (max-width:600px) {
+    .container { flex-direction: column;}
+    .sidebar, .content { min-width:0;}
+    .home-page { padding:18px 6px;}
   }
 </style>
 </head>
@@ -130,23 +44,46 @@
   <p>Calculate quantities for concrete, brickwork, plastering, tiling, and painting</p>
 </header>
 
-<div class="container">
+<div id="main-home" class="home-page">
+  <h1>Welcome!</h1>
+  <p>Select a calculator to begin:</p>
+  <div class="home-tiles">
+    <button onclick="showCalculator('concrete')">Concrete Calculator</button>
+    <button onclick="showCalculator('brickwork')">Brickwork Calculator</button>
+    <button onclick="showCalculator('plastering')">Plastering Calculator</button>
+    <button onclick="showCalculator('tiling')">Tiling Calculator</button>
+    <button onclick="showCalculator('painting')">Painting Calculator</button>
+    <button onclick="showCalculator('privacy-policy')">Privacy Policy</button>
+  </div>
+</div>
+
+<div class="container hidden" id="calc-main">
   <div class="sidebar">
-    <button class="active" data-calc="concrete">Concrete Calculator</button>
-    <button data-calc="brickwork">Brickwork Calculator</button>
-    <button data-calc="plastering">Plastering Calculator</button>
-    <button data-calc="tiling">Tiling Calculator</button>
-    <button data-calc="painting">Painting Calculator</button>
+    <button data-calc="concrete" class="sb-btn">Concrete</button>
+    <button data-calc="brickwork" class="sb-btn">Brickwork</button>
+    <button data-calc="plastering" class="sb-btn">Plastering</button>
+    <button data-calc="tiling" class="sb-btn">Tiling</button>
+    <button data-calc="painting" class="sb-btn">Painting</button>
+    <button data-calc="privacy-policy" class="sb-btn">Privacy Policy</button>
+    <button class="back-home" onclick="backHome()">← Back to Home</button>
   </div>
 
   <div class="content">
+
     <!-- Concrete Calculator -->
-    <section id="concrete" class="calc-section">
+    <section id="concrete" class="calc-section hidden">
       <h2>Concrete Calculator</h2>
-      <div class="variant-selector" style="margin-bottom:15px;">
+      <div class="input-group">
+        <label for="concrete-unit">Primary Unit</label>
+        <select id="concrete-unit">
+          <option value="metric" selected>Metric (m, mm)</option>
+          <option value="imperial">Imperial (ft, in)</option>
+        </select>
+      </div>
+      <div class="variant-selector" style="margin-bottom:13px;">
         <label><strong>Select Element Variant:</strong></label>
-        <select id="concrete-variant" style="max-width: 400px;">
-          <option value="slab">Slab</option>
+        <select id="concrete-variant">
+          <option value="slab" selected>Slab</option>
           <option value="beam">Beam</option>
           <option value="column">Column</option>
           <option value="footing">Footing</option>
@@ -154,134 +91,84 @@
         </select>
       </div>
 
-      <!-- Slab Inputs -->
+      <!-- Variants inputs... (footing per requested order: Length(m), Width(mm), Height(mm)) -->
+      <!-- Slab -->
       <div data-variant="slab" class="variant-input">
         <div class="input-group">
-          <label for="slab-length">Length</label>
-          <input type="number" id="slab-length" step="any" placeholder="e.g. 6" />
-          <select id="slab-length-unit" class="unit-select">
-            <option value="m" selected>m</option>
-            <option value="ft">ft</option>
-          </select>
+          <label id="slab-length-label">Length (m)</label>
+          <input type="number" id="slab-length" step="any" />
         </div>
         <div class="input-group">
-          <label for="slab-width">Width</label>
-          <input type="number" id="slab-width" step="any" placeholder="e.g. 4" />
-          <select id="slab-width-unit" class="unit-select">
-            <option value="m" selected>m</option>
-            <option value="ft">ft</option>
-          </select>
+          <label id="slab-width-label">Width (m)</label>
+          <input type="number" id="slab-width" step="any" />
         </div>
         <div class="input-group">
-          <label for="slab-thickness">Thickness</label>
-          <input type="number" id="slab-thickness" step="any" placeholder="e.g. 200" />
-          <select id="slab-thickness-unit" class="unit-select">
-            <option value="mm" selected>mm</option>
-            <option value="in">in</option>
-          </select>
+          <label id="slab-thickness-label">Thickness (mm)</label>
+          <input type="number" id="slab-thickness" step="any" />
         </div>
       </div>
 
-      <!-- Beam Inputs -->
+      <!-- Beam -->
       <div data-variant="beam" class="variant-input hidden">
         <div class="input-group">
-          <label for="beam-length">Length</label>
-          <input type="number" id="beam-length" step="any" placeholder="e.g. 6" />
-          <select id="beam-length-unit" class="unit-select">
-            <option value="m" selected>m</option>
-            <option value="ft">ft</option>
-          </select>
+          <label id="beam-length-label">Length (m)</label>
+          <input type="number" id="beam-length" step="any" />
         </div>
         <div class="input-group">
-          <label for="beam-width">Width</label>
-          <input type="number" id="beam-width" step="any" placeholder="e.g. 300" />
-          <select id="beam-width-unit" class="unit-select">
-            <option value="mm" selected>mm</option>
-            <option value="in">in</option>
-          </select>
+          <label id="beam-width-label">Width (mm)</label>
+          <input type="number" id="beam-width" step="any" />
         </div>
         <div class="input-group">
-          <label for="beam-depth">Depth</label>
-          <input type="number" id="beam-depth" step="any" placeholder="e.g. 500" />
-          <select id="beam-depth-unit" class="unit-select">
-            <option value="mm" selected>mm</option>
-            <option value="in">in</option>
-          </select>
+          <label id="beam-depth-label">Depth (mm)</label>
+          <input type="number" id="beam-depth" step="any" />
         </div>
       </div>
 
-      <!-- Column Inputs -->
+      <!-- Column -->
       <div data-variant="column" class="variant-input hidden">
         <div class="input-group">
-          <label for="column-height">Height</label>
-          <input type="number" id="column-height" step="any" placeholder="e.g. 3" />
-          <select id="column-height-unit" class="unit-select">
-            <option value="m" selected>m</option>
-            <option value="ft">ft</option>
-          </select>
+          <label id="column-height-label">Height (m)</label>
+          <input type="number" id="column-height" step="any" />
         </div>
         <div class="input-group">
-          <label for="column-width">Width</label>
-          <input type="number" id="column-width" step="any" placeholder="e.g. 400" />
-          <select id="column-width-unit" class="unit-select">
-            <option value="mm" selected>mm</option>
-            <option value="in">in</option>
-          </select>
+          <label id="column-width-label">Width (mm)</label>
+          <input type="number" id="column-width" step="any" />
         </div>
         <div class="input-group">
-          <label for="column-length">Length</label>
-          <input type="number" id="column-length" step="any" placeholder="e.g. 600" />
-          <select id="column-length-unit" class="unit-select">
-            <option value="mm" selected>mm</option>
-            <option value="in">in</option>
-          </select>
+          <label id="column-length-label">Length (mm)</label>
+          <input type="number" id="column-length" step="any" />
         </div>
       </div>
 
-      <!-- Footing Inputs: length(m), width(mm), height(mm) -->
+      <!-- Footing -->
       <div data-variant="footing" class="variant-input hidden">
-        <div class="input-group">
-          <label for="footing-length">Length (m)</label>
-          <input type="number" id="footing-length" step="any" placeholder="e.g. 6" />
-          <!-- length fixed as meters, no unit selector -->
-        </div>
-        <div class="input-group">
-          <label for="footing-width">Width (mm)</label>
-          <input type="number" id="footing-width" step="any" placeholder="e.g. 800" />
-          <!-- width fixed as mm, no unit selector -->
-        </div>
-        <div class="input-group">
-          <label for="footing-height">Height / Depth (mm)</label>
-          <input type="number" id="footing-height" step="any" placeholder="e.g. 500" />
-          <!-- height fixed as mm, no unit selector -->
-        </div>
+       <div class="input-group">
+         <label>Length (m)</label>
+         <input type="number" id="footing-length" step="any" />
+       </div>
+       <div class="input-group">
+         <label>Width (mm)</label>
+         <input type="number" id="footing-width" step="any" />
+       </div>
+       <div class="input-group">
+         <label>Height / Depth (mm)</label>
+         <input type="number" id="footing-height" step="any" />
+       </div>
       </div>
 
-      <!-- Stair Inputs -->
+      <!-- Stair -->
       <div data-variant="stair" class="variant-input hidden">
         <div class="input-group">
-          <label for="stair-waist-length">Waist Slab Length</label>
-          <input type="number" id="stair-waist-length" step="any" placeholder="e.g. 6" />
-          <select id="stair-waist-length-unit" class="unit-select">
-            <option value="m" selected>m</option>
-            <option value="ft">ft</option>
-          </select>
+          <label id="stair-waist-length-label">Waist Slab Length (m)</label>
+          <input type="number" id="stair-waist-length" step="any" />
         </div>
         <div class="input-group">
-          <label for="stair-width">Width</label>
-          <input type="number" id="stair-width" step="any" placeholder="e.g. 1000" />
-          <select id="stair-width-unit" class="unit-select">
-            <option value="mm" selected>mm</option>
-            <option value="in">in</option>
-          </select>
+          <label id="stair-width-label">Width (mm)</label>
+          <input type="number" id="stair-width" step="any" />
         </div>
         <div class="input-group">
-          <label for="stair-thickness">Thickness / Depth</label>
-          <input type="number" id="stair-thickness" step="any" placeholder="e.g. 250" />
-          <select id="stair-thickness-unit" class="unit-select">
-            <option value="mm" selected>mm</option>
-            <option value="in">in</option>
-          </select>
+          <label id="stair-thickness-label">Thickness / Depth (mm)</label>
+          <input type="number" id="stair-thickness" step="any" />
         </div>
       </div>
 
@@ -295,19 +182,15 @@
           <option value="1:0.75:1.5">M30 (1:0.75:1.5)</option>
         </select>
       </div>
-
       <div class="input-group">
         <label for="concrete-water-cement-ratio">Water-Cement Ratio (default 0.5)</label>
         <input type="number" id="concrete-water-cement-ratio" value="0.5" step="0.01" min="0.3" max="0.7" />
       </div>
-
       <div class="input-group">
         <label for="concrete-wastage">Wastage Percentage (%)</label>
         <input type="number" id="concrete-wastage" value="5" min="0" max="20" />
       </div>
-
       <button class="calculate-btn" id="calculate-concrete-btn">Calculate Concrete</button>
-
       <div class="results" id="concrete-results"></div>
     </section>
 
@@ -315,52 +198,35 @@
     <section id="brickwork" class="calc-section hidden">
       <h2>Brickwork Calculator</h2>
       <div class="input-group">
-        <label for="brick-wall-length">Wall Length</label>
-        <input type="number" id="brick-wall-length" step="any" placeholder="e.g. 12" />
-        <select id="brick-wall-length-unit" class="unit-select">
-          <option value="m" selected>m</option>
-          <option value="ft">ft</option>
+        <label>Primary Unit</label>
+        <select id="brick-unit">
+          <option value="metric" selected>Metric (m, mm)</option>
+          <option value="imperial">Imperial (ft, in)</option>
         </select>
       </div>
       <div class="input-group">
-        <label for="brick-wall-height">Wall Height</label>
-        <input type="number" id="brick-wall-height" step="any" placeholder="e.g. 3" />
-        <select id="brick-wall-height-unit" class="unit-select">
-          <option value="m" selected>m</option>
-          <option value="ft">ft</option>
-        </select>
+        <label id="brick-wall-length-label">Wall Length (m)</label>
+        <input type="number" id="brick-wall-length" step="any" />
       </div>
       <div class="input-group">
-        <label for="brick-wall-thickness">Wall Thickness</label>
-        <input type="number" id="brick-wall-thickness" step="any" placeholder="e.g. 230" />
-        <select id="brick-wall-thickness-unit" class="unit-select">
-          <option value="mm" selected>mm</option>
-          <option value="in">in</option>
-        </select>
+        <label id="brick-wall-height-label">Wall Height (m)</label>
+        <input type="number" id="brick-wall-height" step="any" />
       </div>
       <div class="input-group">
-        <label for="brick-brick-length">Brick Length</label>
-        <input type="number" id="brick-brick-length" step="any" placeholder="e.g. 190" />
-        <select id="brick-brick-length-unit" class="unit-select">
-          <option value="mm" selected>mm</option>
-          <option value="in">in</option>
-        </select>
+        <label id="brick-wall-thickness-label">Wall Thickness (mm)</label>
+        <input type="number" id="brick-wall-thickness" step="any" />
       </div>
       <div class="input-group">
-        <label for="brick-brick-width">Brick Width</label>
-        <input type="number" id="brick-brick-width" step="any" placeholder="e.g. 90" />
-        <select id="brick-brick-width-unit" class="unit-select">
-          <option value="mm" selected>mm</option>
-          <option value="in">in</option>
-        </select>
+        <label id="brick-brick-length-label">Brick Length (mm)</label>
+        <input type="number" id="brick-brick-length" step="any" />
       </div>
       <div class="input-group">
-        <label for="brick-brick-height">Brick Height</label>
-        <input type="number" id="brick-brick-height" step="any" placeholder="e.g. 90" />
-        <select id="brick-brick-height-unit" class="unit-select">
-          <option value="mm" selected>mm</option>
-          <option value="in">in</option>
-        </select>
+        <label id="brick-brick-width-label">Brick Width (mm)</label>
+        <input type="number" id="brick-brick-width" step="any" />
+      </div>
+      <div class="input-group">
+        <label id="brick-brick-height-label">Brick Height (mm)</label>
+        <input type="number" id="brick-brick-height" step="any" />
       </div>
       <div class="input-group">
         <label for="brick-mix-ratio">Mortar Ratio (Cement:Sand)</label>
@@ -377,7 +243,6 @@
         <input type="number" id="brick-wastage" value="5" min="0" max="20" />
       </div>
       <button class="calculate-btn" id="calculate-brick-btn">Calculate Brickwork</button>
-
       <div class="results" id="brickwork-results"></div>
     </section>
 
@@ -385,28 +250,23 @@
     <section id="plastering" class="calc-section hidden">
       <h2>Plastering Calculator</h2>
       <div class="input-group">
-        <label for="plaster-wall-length">Wall Length</label>
-        <input type="number" id="plaster-wall-length" step="any" placeholder="e.g. 12" />
-        <select id="plaster-wall-length-unit" class="unit-select">
-          <option value="m" selected>m</option>
-          <option value="ft">ft</option>
+        <label>Primary Unit</label>
+        <select id="plaster-unit">
+          <option value="metric" selected>Metric (m, mm)</option>
+          <option value="imperial">Imperial (ft, in)</option>
         </select>
       </div>
       <div class="input-group">
-        <label for="plaster-wall-height">Wall Height</label>
-        <input type="number" id="plaster-wall-height" step="any" placeholder="e.g. 3" />
-        <select id="plaster-wall-height-unit" class="unit-select">
-          <option value="m" selected>m</option>
-          <option value="ft">ft</option>
-        </select>
+        <label id="plaster-wall-length-label">Wall Length (m)</label>
+        <input type="number" id="plaster-wall-length" step="any" />
       </div>
       <div class="input-group">
-        <label for="plaster-thickness">Plaster Thickness</label>
+        <label id="plaster-wall-height-label">Wall Height (m)</label>
+        <input type="number" id="plaster-wall-height" step="any" />
+      </div>
+      <div class="input-group">
+        <label id="plaster-thickness-label">Plaster Thickness (mm)</label>
         <input type="number" id="plaster-thickness" step="any" value="12" min="6" max="25" />
-        <select id="plaster-thickness-unit" class="unit-select">
-          <option value="mm" selected>mm</option>
-          <option value="in">in</option>
-        </select>
       </div>
       <div class="input-group">
         <label for="plaster-mix-ratio">Mix Ratio (Cement:Sand)</label>
@@ -423,7 +283,6 @@
         <input type="number" id="plaster-wastage" value="10" min="0" max="20" />
       </div>
       <button class="calculate-btn" id="calculate-plaster-btn">Calculate Plastering</button>
-
       <div class="results" id="plastering-results"></div>
     </section>
 
@@ -431,20 +290,19 @@
     <section id="tiling" class="calc-section hidden">
       <h2>Tiling Calculator</h2>
       <div class="input-group">
-        <label for="tiling-length">Floor/Wall Length</label>
-        <input type="number" id="tiling-length" step="any" placeholder="e.g. 5" />
-        <select id="tiling-length-unit" class="unit-select">
-          <option value="m" selected>m</option>
-          <option value="ft">ft</option>
+        <label>Primary Unit</label>
+        <select id="tiling-unit">
+          <option value="metric" selected>Metric (m, mm)</option>
+          <option value="imperial">Imperial (ft, in)</option>
         </select>
       </div>
       <div class="input-group">
-        <label for="tiling-width">Floor/Wall Width</label>
-        <input type="number" id="tiling-width" step="any" placeholder="e.g. 4" />
-        <select id="tiling-width-unit" class="unit-select">
-          <option value="m" selected>m</option>
-          <option value="ft">ft</option>
-        </select>
+        <label id="tiling-length-label">Floor/Wall Length (m)</label>
+        <input type="number" id="tiling-length" step="any" />
+      </div>
+      <div class="input-group">
+        <label id="tiling-width-label">Floor/Wall Width (m)</label>
+        <input type="number" id="tiling-width" step="any" />
       </div>
       <div class="input-group">
         <label for="tile-size">Tile Size (m²)</label>
@@ -456,12 +314,8 @@
         </select>
       </div>
       <div class="input-group">
-        <label for="mortar-thickness">Mortar Thickness</label>
+        <label id="tiling-mortar-thickness-label">Mortar Thickness (mm)</label>
         <input type="number" id="mortar-thickness" step="any" value="50" min="10" max="100" />
-        <select id="mortar-thickness-unit" class="unit-select">
-          <option value="mm" selected>mm</option>
-          <option value="in">in</option>
-        </select>
       </div>
       <div class="input-group">
         <label for="tiling-wastage">Wastage (%)</label>
@@ -470,13 +324,12 @@
       <div class="input-group">
         <label for="tile-chemical">Tile Fixing Chemical (liters/kg per m²)</label>
         <input type="number" id="tile-chemical" step="any" value="0.3" min="0" />
-        <select id="tile-chemical-unit" class="unit-select">
+        <select id="tile-chemical-unit">
           <option value="l/m2" selected>l/m²</option>
           <option value="kg/m2">kg/m²</option>
         </select>
       </div>
       <button class="calculate-btn" id="calculate-tiling-btn">Calculate Tiling</button>
-
       <div class="results" id="tiling-results"></div>
     </section>
 
@@ -484,20 +337,19 @@
     <section id="painting" class="calc-section hidden">
       <h2>Painting Calculator</h2>
       <div class="input-group">
-        <label for="paint-length">Wall Length</label>
-        <input type="number" id="paint-length" step="any" placeholder="e.g. 12" />
-        <select id="paint-length-unit" class="unit-select">
-          <option value="m" selected>m</option>
-          <option value="ft">ft</option>
+        <label>Primary Unit</label>
+        <select id="paint-unit">
+          <option value="metric" selected>Metric (m)</option>
+          <option value="imperial">Imperial (ft)</option>
         </select>
       </div>
       <div class="input-group">
-        <label for="paint-height">Wall Height</label>
-        <input type="number" id="paint-height" step="any" placeholder="e.g. 3" />
-        <select id="paint-height-unit" class="unit-select">
-          <option value="m" selected>m</option>
-          <option value="ft">ft</option>
-        </select>
+        <label id="paint-length-label">Wall Length (m)</label>
+        <input type="number" id="paint-length" step="any" />
+      </div>
+      <div class="input-group">
+        <label id="paint-height-label">Wall Height (m)</label>
+        <input type="number" id="paint-height" step="any" />
       </div>
       <div class="input-group">
         <label for="paint-coats">Number of Coats</label>
@@ -508,45 +360,48 @@
         <input type="number" id="paint-coverage" value="10" min="1" />
       </div>
       <button class="calculate-btn" id="calculate-paint-btn">Calculate Paint Needed</button>
-
       <div class="results" id="painting-results"></div>
     </section>
+
+    <!-- Privacy Policy -->
+    <section id="privacy-policy" class="calc-section hidden">
+      <h2>Privacy Policy</h2>
+      <p>Your privacy is important to us. This application does not collect or store any personal or usage data. All calculations are performed locally in your browser.</p>
+      <button class="back-home" onclick="backHome()">← Back to Home</button>
+    </section>
+
   </div>
 </div>
 
 <script>
-
-  function toMeters(val, unit) {
-    if (isNaN(val)) return NaN;
-    switch(unit) {
-      case 'm': return val;
-      case 'ft': return val * 0.3048;
-      default: return val;
-    }
+  // Navigation
+  function backHome() {
+    document.getElementById('main-home').classList.remove('hidden');
+    document.getElementById('calc-main').classList.add('hidden');
+    document.querySelectorAll('.calc-section').forEach(s => s.classList.add('hidden'));
+    document.querySelectorAll('.sb-btn').forEach(b => b.classList.remove('active'));
   }
 
-  function toMillimeters(val, unit) {
-    if (isNaN(val)) return NaN;
-    switch(unit) {
-      case 'mm': return val;
-      case 'in': return val * 25.4;
-      default: return val;
-    }
+  function showCalculator(calcName) {
+    document.getElementById('main-home').classList.add('hidden');
+    document.getElementById('calc-main').classList.remove('hidden');
+    showCalcSection(calcName);
   }
 
-  const sidebarButtons = document.querySelectorAll('.sidebar button');
-  const calcSections = document.querySelectorAll('.calc-section');
-  sidebarButtons.forEach(btn => {
-    btn.onclick = () => {
-      sidebarButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const calcId = btn.getAttribute('data-calc');
-      calcSections.forEach(section => {
-        section.classList.toggle('hidden', section.id !== calcId);
-      });
-    };
+  function showCalcSection(name) {
+    document.querySelectorAll('.calc-section').forEach(sec => {
+      sec.classList.toggle('hidden', sec.id !== name);
+    });
+    document.querySelectorAll('.sb-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-calc') === name);
+    });
+  }
+
+  document.querySelectorAll('.sb-btn').forEach(btn => {
+    btn.onclick = function () { showCalcSection(this.getAttribute('data-calc')); };
   });
 
+  // Concrete variant toggle
   const variantSelect = document.getElementById('concrete-variant');
   const variantInputs = document.querySelectorAll('.variant-input');
   variantSelect.addEventListener('change', () => {
@@ -556,225 +411,201 @@
     });
   });
 
+  // Unit conversion helper functions:
+  function toMeters(val, unit) {
+    if (isNaN(val)) return NaN;
+    return unit==='imperial' ? val * 0.3048 : val;
+  }
+  function toMillimeters(val, unit) {
+    if (isNaN(val)) return NaN;
+    return unit==='imperial' ? val * 25.4 : val;
+  }
+
+  // CONCRETE CALCULATION
   document.getElementById('calculate-concrete-btn').onclick = () => {
+    const unit = document.getElementById('concrete-unit').value;
     const variant = variantSelect.value;
     const mixRatio = document.getElementById('concrete-mix-ratio').value.split(':').map(Number);
     const waterCementRatio = parseFloat(document.getElementById('concrete-water-cement-ratio').value);
     const wastage = parseFloat(document.getElementById('concrete-wastage').value) / 100;
-
     let vol = 0;
     try {
       if (variant === 'slab') {
-        const l = toMeters(parseFloat(document.getElementById('slab-length').value), document.getElementById('slab-length-unit').value);
-        const w = toMeters(parseFloat(document.getElementById('slab-width').value), document.getElementById('slab-width-unit').value);
-        const t = toMillimeters(parseFloat(document.getElementById('slab-thickness').value), document.getElementById('slab-thickness-unit').value) / 1000;
-        if(isNaN(l) || isNaN(w) || isNaN(t)) throw 'Input all slab dimensions';
+        const l = toMeters(parseFloat(document.getElementById('slab-length').value), unit);
+        const w = toMeters(parseFloat(document.getElementById('slab-width').value), unit);
+        const t = toMillimeters(parseFloat(document.getElementById('slab-thickness').value), unit) / 1000;
+        if (isNaN(l) || isNaN(w) || isNaN(t)) throw 'Input all slab dimensions';
         vol = l * w * t;
       } else if (variant === 'beam') {
-        const l = toMeters(parseFloat(document.getElementById('beam-length').value), document.getElementById('beam-length-unit').value);
-        const w = toMillimeters(parseFloat(document.getElementById('beam-width').value), document.getElementById('beam-width-unit').value) / 1000;
-        const d = toMillimeters(parseFloat(document.getElementById('beam-depth').value), document.getElementById('beam-depth-unit').value) / 1000;
-        if(isNaN(l) || isNaN(w) || isNaN(d)) throw 'Input all beam dimensions';
+        const l = toMeters(parseFloat(document.getElementById('beam-length').value), unit);
+        const w = toMillimeters(parseFloat(document.getElementById('beam-width').value), unit) / 1000;
+        const d = toMillimeters(parseFloat(document.getElementById('beam-depth').value), unit) / 1000;
+        if (isNaN(l) || isNaN(w) || isNaN(d)) throw 'Input all beam dimensions';
         vol = l * w * d;
       } else if (variant === 'column') {
-        const h = toMeters(parseFloat(document.getElementById('column-height').value), document.getElementById('column-height-unit').value);
-        const w = toMillimeters(parseFloat(document.getElementById('column-width').value), document.getElementById('column-width-unit').value) / 1000;
-        const l_ = toMillimeters(parseFloat(document.getElementById('column-length').value), document.getElementById('column-length-unit').value) / 1000;
-        if(isNaN(h) || isNaN(w) || isNaN(l_)) throw 'Input all column dimensions';
+        const h = toMeters(parseFloat(document.getElementById('column-height').value), unit);
+        const w = toMillimeters(parseFloat(document.getElementById('column-width').value), unit) / 1000;
+        const l_ = toMillimeters(parseFloat(document.getElementById('column-length').value), unit) / 1000;
+        if (isNaN(h) || isNaN(w) || isNaN(l_)) throw 'Input all column dimensions';
         vol = h * w * l_;
       } else if (variant === 'footing') {
         const l = parseFloat(document.getElementById('footing-length').value);
         const w = parseFloat(document.getElementById('footing-width').value) / 1000;
         const h = parseFloat(document.getElementById('footing-height').value) / 1000;
-        if(isNaN(l) || isNaN(w) || isNaN(h)) throw 'Input all footing dimensions';
+        if (isNaN(l) || isNaN(w) || isNaN(h)) throw 'Input all footing dimensions';
         vol = l * w * h;
       } else if (variant === 'stair') {
-        const l = toMeters(parseFloat(document.getElementById('stair-waist-length').value), document.getElementById('stair-waist-length-unit').value);
-        const w = toMillimeters(parseFloat(document.getElementById('stair-width').value), document.getElementById('stair-width-unit').value) / 1000;
-        const t = toMillimeters(parseFloat(document.getElementById('stair-thickness').value), document.getElementById('stair-thickness-unit').value) / 1000;
-        if(isNaN(l) || isNaN(w) || isNaN(t)) throw 'Input all stair dimensions';
+        const l = toMeters(parseFloat(document.getElementById('stair-waist-length').value), unit);
+        const w = toMillimeters(parseFloat(document.getElementById('stair-width').value), unit) / 1000;
+        const t = toMillimeters(parseFloat(document.getElementById('stair-thickness').value), unit) / 1000;
+        if (isNaN(l) || isNaN(w) || isNaN(t)) throw 'Input all stair dimensions';
         vol = l * w * t;
       }
-    } catch(e) {
-      alert(e);
-      return;
-    }
+    } catch (e) { alert(e); return; }
 
     const wetVol = vol * (1 + wastage);
     const dryVol = wetVol * 1.54;
-
     const totalParts = mixRatio.reduce((a,b) => a+b, 0);
     const cementVol = dryVol * (mixRatio[0] / totalParts);
     const sandVol = dryVol * (mixRatio[1] / totalParts);
     const aggVol = dryVol * (mixRatio[2] / totalParts);
-
     const cementWeight = cementVol * 1440;
     const cementBags = cementWeight / 50;
     const waterRequired = cementWeight * waterCementRatio;
 
     document.getElementById('concrete-results').innerHTML = `
       <div class="results">
-        <div class="result-item"><span>Wet Volume (m³):</span> <span>${wetVol.toFixed(3)}</span></div>
-        <div class="result-item"><span>Dry Volume (m³):</span> <span>${dryVol.toFixed(3)}</span></div>
-        <div class="result-item"><span>Cement Bags:</span> <span>${cementBags.toFixed(2)}</span></div>
-        <div class="result-item"><span>Sand Volume (m³):</span> <span>${sandVol.toFixed(3)}</span></div>
-        <div class="result-item"><span>Aggregate Volume (m³):</span> <span>${aggVol.toFixed(3)}</span></div>
-        <div class="result-item"><span>Water Required (liters):</span> <span>${waterRequired.toFixed(2)}</span></div>
-      </div>
-    `;
+        <div class="result-item"><span>Wet Volume (m³):</span><span>${wetVol.toFixed(3)}</span></div>
+        <div class="result-item"><span>Dry Volume (m³):</span><span>${dryVol.toFixed(3)}</span></div>
+        <div class="result-item"><span>Cement Bags:</span><span>${cementBags.toFixed(2)}</span></div>
+        <div class="result-item"><span>Sand Volume (m³):</span><span>${sandVol.toFixed(3)}</span></div>
+        <div class="result-item"><span>Aggregate Volume (m³):</span><span>${aggVol.toFixed(3)}</span></div>
+        <div class="result-item"><span>Water Required (liters):</span><span>${waterRequired.toFixed(2)}</span></div>
+      </div>`;
   };
 
+  // Brickwork Calculator
   document.getElementById('calculate-brick-btn').onclick = () => {
-    const wl = toMeters(parseFloat(document.getElementById('brick-wall-length').value), document.getElementById('brick-wall-length-unit').value);
-    const wh = toMeters(parseFloat(document.getElementById('brick-wall-height').value), document.getElementById('brick-wall-height-unit').value);
-    const wt = toMillimeters(parseFloat(document.getElementById('brick-wall-thickness').value), document.getElementById('brick-wall-thickness-unit').value) / 1000;
-    const bl = toMillimeters(parseFloat(document.getElementById('brick-brick-length').value), document.getElementById('brick-brick-length-unit').value) / 1000;
-    const bw = toMillimeters(parseFloat(document.getElementById('brick-brick-width').value), document.getElementById('brick-brick-width-unit').value) / 1000;
-    const bh = toMillimeters(parseFloat(document.getElementById('brick-brick-height').value), document.getElementById('brick-brick-height-unit').value) / 1000;
+    const unit = document.getElementById('brick-unit').value;
+    const wl = toMeters(parseFloat(document.getElementById('brick-wall-length').value), unit);
+    const wh = toMeters(parseFloat(document.getElementById('brick-wall-height').value), unit);
+    const wt = toMillimeters(parseFloat(document.getElementById('brick-wall-thickness').value), unit) / 1000;
+    const bl = toMillimeters(parseFloat(document.getElementById('brick-brick-length').value), unit) / 1000;
+    const bw = toMillimeters(parseFloat(document.getElementById('brick-brick-width').value), unit) / 1000;
+    const bh = toMillimeters(parseFloat(document.getElementById('brick-brick-height').value), unit) / 1000;
     const ratioStr = document.getElementById('brick-mix-ratio').value.split(':').map(Number);
     const wastage = parseFloat(document.getElementById('brick-wastage').value) / 100;
-
-    if (isNaN(wl) || isNaN(wh) || isNaN(wt) || isNaN(bl) || isNaN(bw) || isNaN(bh)) {
-      alert('Enter all brickwork dimensions');
-      return;
-    }
-
+    if (isNaN(wl) || isNaN(wh) || isNaN(wt) || isNaN(bl) || isNaN(bw) || isNaN(bh)) { alert('Enter all brickwork dimensions'); return; }
     const wallVol = wl * wh * wt;
     const mortarThickness = 0.012;
-
-    // Brick size including mortar
     const blm = bl + mortarThickness;
     const bwm = bw + mortarThickness;
     const bhm = bh + mortarThickness;
-
     const brickWithMortarVol = blm * bwm * bhm;
     let numBricks = wallVol / brickWithMortarVol * (1 + wastage);
     const totalActualBrickVol = Math.ceil(numBricks) * (bl * bw * bh);
-
     let mortarVol = (wallVol - totalActualBrickVol) * (1 + wastage);
     const totalRatio = ratioStr.reduce((a,b) => a+b,0);
     const cementVol = mortarVol * (ratioStr[0] / totalRatio);
     const sandVol = mortarVol * (ratioStr[1] / totalRatio);
-
     const cementWeight = cementVol * 1440;
     const cementBags = cementWeight / 50;
     const waterRequired = cementWeight * 0.5;
-
     document.getElementById('brickwork-results').innerHTML = `
       <div class="results">
-        <div class="result-item"><span>Number of Bricks:</span> <span>${Math.ceil(numBricks)}</span></div>
-        <div class="result-item"><span>Cement Bags:</span> <span>${cementBags.toFixed(2)}</span></div>
-        <div class="result-item"><span>Sand Volume (m³):</span> <span>${sandVol.toFixed(3)}</span></div>
-        <div class="result-item"><span>Water Required (liters):</span> <span>${waterRequired.toFixed(2)}</span></div>
-      </div>
-    `;
+        <div class="result-item"><span>Number of Bricks:</span><span>${Math.ceil(numBricks)}</span></div>
+        <div class="result-item"><span>Cement Bags:</span><span>${cementBags.toFixed(2)}</span></div>
+        <div class="result-item"><span>Sand Volume (m³):</span><span>${sandVol.toFixed(3)}</span></div>
+        <div class="result-item"><span>Water Required (liters):</span><span>${waterRequired.toFixed(2)}</span></div>
+      </div>`;
   };
 
+  // Plastering Calculator
   document.getElementById('calculate-plaster-btn').onclick = () => {
-    const wl = toMeters(parseFloat(document.getElementById('plaster-wall-length').value), document.getElementById('plaster-wall-length-unit').value);
-    const wh = toMeters(parseFloat(document.getElementById('plaster-wall-height').value), document.getElementById('plaster-wall-height-unit').value);
+    const unit = document.getElementById('plaster-unit').value;
+    const wl = toMeters(parseFloat(document.getElementById('plaster-wall-length').value), unit);
+    const wh = toMeters(parseFloat(document.getElementById('plaster-wall-height').value), unit);
     let thickness_mm = parseFloat(document.getElementById('plaster-thickness').value);
-    const thicknessUnit = document.getElementById('plaster-thickness-unit').value;
-    if (thicknessUnit === 'in') thickness_mm = thickness_mm * 25.4;
+    if(unit==='imperial') thickness_mm *= 25.4;
     const ratioStr = document.getElementById('plaster-mix-ratio').value.split(':').map(Number);
     const wastage = parseFloat(document.getElementById('plaster-wastage').value) / 100;
-
-    if (isNaN(wl) || isNaN(wh) || isNaN(thickness_mm)) {
-      alert('Enter all plastering inputs');
-      return;
-    }
-
+    if (isNaN(wl) || isNaN(wh) || isNaN(thickness_mm)) { alert('Enter all plastering inputs'); return; }
     const area = wl * wh;
     let wetVol = area * (thickness_mm / 1000) * (1 + 0.2) * (1 + wastage);
     let dryVol = wetVol * 1.33;
     const totalRatio = ratioStr.reduce((a,b) => a+b,0);
     const cementVol = (dryVol * ratioStr[0]) / totalRatio;
     const sandVol = (dryVol * ratioStr[1]) / totalRatio;
-
     const cementWeight = cementVol * 1440;
     const cementBags = cementWeight / 50;
     const sandWeight = sandVol * 1600;
     const waterRequired = 0.2 * (cementWeight + sandWeight);
-
     document.getElementById('plastering-results').innerHTML = `
       <div class="results">
-        <div class="result-item"><span>Wet Volume (m³):</span> <span>${wetVol.toFixed(3)}</span></div>
-        <div class="result-item"><span>Dry Volume (m³):</span> <span>${dryVol.toFixed(3)}</span></div>
-        <div class="result-item"><span>Cement Bags:</span> <span>${cementBags.toFixed(2)}</span></div>
-        <div class="result-item"><span>Sand Volume (m³):</span> <span>${sandVol.toFixed(3)}</span></div>
-        <div class="result-item"><span>Water Required (liters):</span> <span>${waterRequired.toFixed(2)}</span></div>
-      </div>
-    `;
+        <div class="result-item"><span>Wet Volume (m³):</span><span>${wetVol.toFixed(3)}</span></div>
+        <div class="result-item"><span>Dry Volume (m³):</span><span>${dryVol.toFixed(3)}</span></div>
+        <div class="result-item"><span>Cement Bags:</span><span>${cementBags.toFixed(2)}</span></div>
+        <div class="result-item"><span>Sand Volume (m³):</span><span>${sandVol.toFixed(3)}</span></div>
+        <div class="result-item"><span>Water Required (liters):</span><span>${waterRequired.toFixed(2)}</span></div>
+      </div>`;
   };
 
+  // Tiling Calculator
   document.getElementById('calculate-tiling-btn').onclick = () => {
-    const length = toMeters(parseFloat(document.getElementById('tiling-length').value), document.getElementById('tiling-length-unit').value);
-    const width = toMeters(parseFloat(document.getElementById('tiling-width').value), document.getElementById('tiling-width-unit').value);
+    const unit = document.getElementById('tiling-unit').value;
+    const length = toMeters(parseFloat(document.getElementById('tiling-length').value), unit);
+    const width = toMeters(parseFloat(document.getElementById('tiling-width').value), unit);
     const tileSize = parseFloat(document.getElementById('tile-size').value);
     let mortarThickness = parseFloat(document.getElementById('mortar-thickness').value);
-    if(document.getElementById('mortar-thickness-unit').value === 'in') mortarThickness *= 25.4;
+    if(unit==='imperial') mortarThickness *= 25.4;
     mortarThickness = mortarThickness / 1000;
     const wastage = parseFloat(document.getElementById('tiling-wastage').value) / 100;
-
     let tileChemicalRate = parseFloat(document.getElementById('tile-chemical').value);
     const tileChemicalUnit = document.getElementById('tile-chemical-unit').value;
-
-    if (isNaN(length)||isNaN(width)||isNaN(tileSize)||isNaN(mortarThickness)||isNaN(tileChemicalRate)) {
-      alert('Complete all tiling inputs');
-      return;
+    if (isNaN(length) || isNaN(width) || isNaN(tileSize) || isNaN(mortarThickness) || isNaN(tileChemicalRate)) {
+      alert('Complete all tiling inputs'); return;
     }
-
     const area = length * width;
     let tileCount = area / tileSize;
     tileCount *= (1 + wastage);
-
     const wetMortarVol = area * mortarThickness;
     const dryMortarVol = wetMortarVol * 1.25;
-
     const cementVol = dryMortarVol / 5;
     const sandVol = dryMortarVol * 4/5;
     const cementWeight = cementVol * 1440;
     const cementBags = cementWeight / 50;
     const waterRequired = cementWeight * 0.5;
-
     let tileChemicalTotal = tileChemicalRate * area;
-
     document.getElementById('tiling-results').innerHTML = `
       <div class="results">
-        <div class="result-item"><span>Tiles Required:</span> <span>${Math.ceil(tileCount)}</span></div>
-        <div class="result-item"><span>Mortar Wet Volume (m³):</span> <span>${wetMortarVol.toFixed(3)}</span></div>
-        <div class="result-item"><span>Mortar Dry Volume (m³):</span> <span>${dryMortarVol.toFixed(3)}</span></div>
-        <div class="result-item"><span>Cement Bags:</span> <span>${cementBags.toFixed(2)}</span></div>
-        <div class="result-item"><span>Sand Volume (m³):</span> <span>${sandVol.toFixed(3)}</span></div>
-        <div class="result-item"><span>Water Required (liters):</span> <span>${waterRequired.toFixed(2)}</span></div>
-        <div class="result-item"><span>Tile Fixing Chemical (${tileChemicalUnit}):</span> <span>${tileChemicalTotal.toFixed(2)}</span></div>
-      </div>
-    `;
+        <div class="result-item"><span>Tiles Required:</span><span>${Math.ceil(tileCount)}</span></div>
+        <div class="result-item"><span>Mortar Wet Volume (m³):</span><span>${wetMortarVol.toFixed(3)}</span></div>
+        <div class="result-item"><span>Mortar Dry Volume (m³):</span><span>${dryMortarVol.toFixed(3)}</span></div>
+        <div class="result-item"><span>Cement Bags:</span><span>${cementBags.toFixed(2)}</span></div>
+        <div class="result-item"><span>Sand Volume (m³):</span><span>${sandVol.toFixed(3)}</span></div>
+        <div class="result-item"><span>Water Required (liters):</span><span>${waterRequired.toFixed(2)}</span></div>
+        <div class="result-item"><span>Tile Fixing Chemical (${tileChemicalUnit}):</span><span>${tileChemicalTotal.toFixed(2)}</span></div>
+      </div>`;
   };
 
+  // Painting Calculator
   document.getElementById('calculate-paint-btn').onclick = () => {
-    const length = toMeters(parseFloat(document.getElementById('paint-length').value), document.getElementById('paint-length-unit').value);
-    const height = toMeters(parseFloat(document.getElementById('paint-height').value), document.getElementById('paint-height-unit').value);
+    const unit = document.getElementById('paint-unit').value;
+    const length = toMeters(parseFloat(document.getElementById('paint-length').value), unit);
+    const height = toMeters(parseFloat(document.getElementById('paint-height').value), unit);
     const coats = parseInt(document.getElementById('paint-coats').value);
     const coverage = parseFloat(document.getElementById('paint-coverage').value);
-
-    if(isNaN(length) || isNaN(height) || isNaN(coats) || isNaN(coverage)) {
-      alert('Complete painting inputs');
-      return;
-    }
-
+    if(isNaN(length) || isNaN(height) || isNaN(coats) || isNaN(coverage)) { alert('Complete painting inputs'); return; }
     const area = length * height;
     const totalArea = area * coats;
     const paintNeeded = totalArea / coverage;
-
     document.getElementById('painting-results').innerHTML = `
       <div class="results">
-        <div class="result-item"><span>Total Surface Area (m²):</span> <span>${totalArea.toFixed(2)}</span></div>
-        <div class="result-item"><span>Paint Required (liters):</span> <span>${paintNeeded.toFixed(2)}</span></div>
-      </div>
-    `;
+        <div class="result-item"><span>Total Surface Area (m²):</span><span>${totalArea.toFixed(2)}</span></div>
+        <div class="result-item"><span>Paint Required (liters):</span><span>${paintNeeded.toFixed(2)}</span></div>
+      </div>`;
   };
 </script>
 
 </body>
-</html>
+</html>  
