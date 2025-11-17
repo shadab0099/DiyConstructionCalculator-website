@@ -104,7 +104,7 @@
 </script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Construction Calculators — Enhanced Steel Calculator</title>
+<title>Construction Calculators — DiyCivil-Calc</title>
 <style>
 :root {
   --bg: #f8fafc;
@@ -634,7 +634,7 @@ input[type="number"] {
               <div class="field">
                 <label>Length</label>
                 <div class="input-with-unit">
-                  <input id="c_beam_len" class="conv-length" type="number" step="any"/>
+                  <input id="c_beam_len" class="conv-length" type="number" step="any" value="5"/>
                   <select id="u_c_beam_len" class="unit-select-length">
                     <option value="m">m</option>
                     <option value="ft">ft</option>
@@ -644,7 +644,7 @@ input[type="number"] {
               <div class="field">
                 <label>Width</label>
                 <div class="input-with-unit">
-                  <input id="c_beam_w" class="conv-dim-mm" type="number" step="any"/>
+                  <input id="c_beam_w" class="conv-dim-mm" type="number" step="any" value="300"/>
                   <select id="u_c_beam_w" class="unit-select-dim">
                     <option value="mm">mm</option>
                     <option value="in">in</option>
@@ -654,7 +654,7 @@ input[type="number"] {
               <div class="field">
                 <label>Depth</label>
                 <div class="input-with-unit">
-                  <input id="c_beam_d" class="conv-dim-mm" type="number" step="any"/>
+                  <input id="c_beam_d" class="conv-dim-mm" type="number" step="any" value="500"/>
                   <select id="u_c_beam_d" class="unit-select-dim">
                     <option value="mm">mm</option>
                     <option value="in">in</option>
@@ -669,7 +669,7 @@ input[type="number"] {
               <div class="field">
                 <label>Height</label>
                 <div class="input-with-unit">
-                  <input id="c_col_h" class="conv-length" type="number" step="any"/>
+                  <input id="c_col_h" class="conv-length" type="number" step="any" value="3"/>
                   <select id="u_c_col_h" class="unit-select-length">
                     <option value="m">m</option>
                     <option value="ft">ft</option>
@@ -679,7 +679,7 @@ input[type="number"] {
               <div class="field">
                 <label>Width</label>
                 <div class="input-with-unit">
-                  <input id="c_col_w" class="conv-dim-mm" type="number" step="any"/>
+                  <input id="c_col_w" class="conv-dim-mm" type="number" step="any" value="400"/>
                   <select id="u_c_col_w" class="unit-select-dim">
                     <option value="mm">mm</option>
                     <option value="in">in</option>
@@ -689,7 +689,7 @@ input[type="number"] {
               <div class="field">
                 <label>Length</label>
                 <div class="input-with-unit">
-                  <input id="c_col_l" class="conv-dim-mm" type="number" step="any"/>
+                  <input id="c_col_l" class="conv-dim-mm" type="number" step="any" value="400"/>
                   <select id="u_c_col_l" class="unit-select-dim">
                     <option value="mm">mm</option>
                     <option value="in">in</option>
@@ -704,7 +704,7 @@ input[type="number"] {
               <div class="field">
                 <label>Length</label>
                 <div class="input-with-unit">
-                  <input id="c_slab_l" class="conv-length" type="number" step="any"/>
+                  <input id="c_slab_l" class="conv-length" type="number" step="any" value="5"/>
                   <select id="u_c_slab_l" class="unit-select-length">
                     <option value="m">m</option>
                     <option value="ft">ft</option>
@@ -714,7 +714,7 @@ input[type="number"] {
               <div class="field">
                 <label>Width</label>
                 <div class="input-with-unit">
-                  <input id="c_slab_w" class="conv-length" type="number" step="any"/>
+                  <input id="c_slab_w" class="conv-length" type="number" step="any" value="4"/>
                   <select id="u_c_slab_w" class="unit-select-length">
                     <option value="m">m</option>
                     <option value="ft">ft</option>
@@ -724,7 +724,7 @@ input[type="number"] {
               <div class="field">
                 <label>Thickness</label>
                 <div class="input-with-unit">
-                  <input id="c_slab_t" class="conv-dim-mm" type="number" step="any"/>
+                  <input id="c_slab_t" class="conv-dim-mm" type="number" step="any" value="150"/>
                   <select id="u_c_slab_t" class="unit-select-dim">
                     <option value="mm">mm</option>
                     <option value="in">in</option>
@@ -739,7 +739,7 @@ input[type="number"] {
               <div class="field">
                 <label>Length</label>
                 <div class="input-with-unit">
-                  <input id="c_foot_l" class="conv-length" type="number" step="any"/>
+                  <input id="c_foot_l" class="conv-length" type="number" step="any" value="1.5"/>
                   <select id="u_c_foot_l" class="unit-select-length">
                     <option value="m">m</option>
                     <option value="ft">ft</option>
@@ -749,7 +749,7 @@ input[type="number"] {
               <div class="field">
                 <label>Width</label>
                 <div class="input-with-unit">
-                  <input id="c_foot_w" class="conv-length" type="number" step="any"/>
+                  <input id="c_foot_w" class="conv-length" type="number" step="any" value="1.5"/>
                   <select id="u_c_foot_w" class="unit-select-length">
                     <option value="m">m</option>
                     <option value="ft">ft</option>
@@ -759,7 +759,7 @@ input[type="number"] {
               <div class="field">
                 <label>Depth</label>
                 <div class="input-with-unit">
-                  <input id="c_foot_d" class="conv-dim-mm" type="number" step="any"/>
+                  <input id="c_foot_d" class="conv-dim-mm" type="number" step="any" value="300"/>
                   <select id="u_c_foot_d" class="unit-select-dim">
                     <option value="mm">mm</option>
                     <option value="in">in</option>
@@ -774,7 +774,7 @@ input[type="number"] {
               <div class="field">
                 <label>Length</label>
                 <div class="input-with-unit">
-                  <input id="c_lintel_l" class="conv-length" type="number" step="any"/>
+                  <input id="c_lintel_l" class="conv-length" type="number" step="any" value="2"/>
                   <select id="u_c_lintel_l" class="unit-select-length">
                     <option value="m">m</option>
                     <option value="ft">ft</option>
@@ -784,7 +784,7 @@ input[type="number"] {
               <div class="field">
                 <label>Width</label>
                 <div class="input-with-unit">
-                  <input id="c_lintel_w" class="conv-dim-mm" type="number" step="any"/>
+                  <input id="c_lintel_w" class="conv-dim-mm" type="number" step="any" value="200"/>
                   <select id="u_c_lintel_w" class="unit-select-dim">
                     <option value="mm">mm</option>
                     <option value="in">in</option>
@@ -794,7 +794,7 @@ input[type="number"] {
               <div class="field">
                 <label>Depth</label>
                 <div class="input-with-unit">
-                  <input id="c_lintel_d" class="conv-dim-mm" type="number" step="any"/>
+                  <input id="c_lintel_d" class="conv-dim-mm" type="number" step="any" value="150"/>
                   <select id="u_c_lintel_d" class="unit-select-dim">
                     <option value="mm">mm</option>
                     <option value="in">in</option>
@@ -836,7 +836,7 @@ input[type="number"] {
 
       <!-- Steel -->
       <section id="steel" class="card section hidden">
-        <h2>Steel - DiyCivilCalc Pro | Reinforcement Weight & Bar Estimator</h2>
+        <h2>Steel - DiyCivil-Calc | Reinforcement Weight & Bar Estimator</h2>
         
         <div class="tabs" id="steelTabs">
           <div class="tab active" data-variant="beam">Beam</div>
@@ -1203,7 +1203,7 @@ input[type="number"] {
           <div class="field">
             <label>Length</label>
             <div class="input-with-unit">
-              <input id="b_len" class="conv-length" type="number"/>
+              <input id="b_len" class="conv-length" type="number" value="5"/>
               <select id="u_b_len" class="unit-select-length">
                 <option value="m">m</option>
                 <option value="ft">ft</option>
@@ -1213,7 +1213,7 @@ input[type="number"] {
           <div class="field">
             <label>Height</label>
             <div class="input-with-unit">
-              <input id="b_h" class="conv-length" type="number"/>
+              <input id="b_h" class="conv-length" type="number" value="3"/>
               <select id="u_b_h" class="unit-select-length">
                 <option value="m">m</option>
                 <option value="ft">ft</option>
@@ -1244,7 +1244,7 @@ input[type="number"] {
           <div class="field hidden" id="b_custom_row">
             <label>Brick l (mm)</label>
             <div class="input-with-unit">
-              <input id="b_l" class="conv-dim-mm" type="number"/>
+              <input id="b_l" class="conv-dim-mm" type="number" value="230"/>
               <select class="unit-select-dim" disabled>
                 <option value="mm">mm</option>
               </select>
@@ -1253,7 +1253,7 @@ input[type="number"] {
           <div class="field hidden" id="b_custom_row2">
             <label>Brick w (mm)</label>
             <div class="input-with-unit">
-              <input id="b_w" class="conv-dim-mm" type="number"/>
+              <input id="b_w" class="conv-dim-mm" type="number" value="115"/>
               <select class="unit-select-dim" disabled>
                 <option value="mm">mm</option>
               </select>
@@ -1262,7 +1262,7 @@ input[type="number"] {
           <div class="field hidden" id="b_custom_row3">
             <label>Brick h (mm)</label>
             <div class="input-with-unit">
-              <input id="b_hb" class="conv-dim-mm" type="number"/>
+              <input id="b_hb" class="conv-dim-mm" type="number" value="75"/>
               <select class="unit-select-dim" disabled>
                 <option value="mm">mm</option>
               </select>
@@ -1310,7 +1310,7 @@ input[type="number"] {
           <div class="field">
             <label>Length</label>
             <div class="input-with-unit">
-              <input id="p_len" class="conv-length" type="number"/>
+              <input id="p_len" class="conv-length" type="number" value="5"/>
               <select id="u_p_len" class="unit-select-length">
                 <option value="m">m</option>
                 <option value="ft">ft</option>
@@ -1320,7 +1320,7 @@ input[type="number"] {
           <div class="field">
             <label>Height</label>
             <div class="input-with-unit">
-              <input id="p_h" class="conv-length" type="number"/>
+              <input id="p_h" class="conv-length" type="number" value="3"/>
               <select id="u_p_h" class="unit-select-length">
                 <option value="m">m</option>
                 <option value="ft">ft</option>
@@ -1369,7 +1369,7 @@ input[type="number"] {
           <div class="field">
             <label>Length</label>
             <div class="input-with-unit">
-              <input id="t_len" class="conv-length" type="number"/>
+              <input id="t_len" class="conv-length" type="number" value="5"/>
               <select id="u_t_len" class="unit-select-length">
                 <option value="m">m</option>
                 <option value="ft">ft</option>
@@ -1379,7 +1379,7 @@ input[type="number"] {
           <div class="field">
             <label>Width</label>
             <div class="input-with-unit">
-              <input id="t_w" class="conv-length" type="number"/>
+              <input id="t_w" class="conv-length" type="number" value="4"/>
               <select id="u_t_w" class="unit-select-length">
                 <option value="m">m</option>
                 <option value="ft">ft</option>
@@ -1403,7 +1403,7 @@ input[type="number"] {
           <div class="field">
             <label>Custom tile length</label>
             <div class="input-with-unit">
-              <input id="t_tile_custom_l" class="conv-dim-mm" type="number"/>
+              <input id="t_tile_custom_l" class="conv-dim-mm" type="number" value="300"/>
               <select id="u_t_tile_custom_l" class="unit-select-dim">
                 <option value="mm">mm</option>
                 <option value="in">in</option>
@@ -1413,7 +1413,7 @@ input[type="number"] {
           <div class="field">
             <label>Custom tile width</label>
             <div class="input-with-unit">
-              <input id="t_tile_custom_w" class="conv-dim-mm" type="number"/>
+              <input id="t_tile_custom_w" class="conv-dim-mm" type="number" value="300"/>
               <select id="u_t_tile_custom_w" class="unit-select-dim">
                 <option value="mm">mm</option>
                 <option value="in">in</option>
@@ -1499,7 +1499,7 @@ input[type="number"] {
           <div class="field">
             <label>Length</label>
             <div class="input-with-unit">
-              <input id="pa_len" class="conv-length" type="number"/>
+              <input id="pa_len" class="conv-length" type="number" value="5"/>
               <select id="u_pa_len" class="unit-select-length">
                 <option value="m">m</option>
                 <option value="ft">ft</option>
@@ -1509,7 +1509,7 @@ input[type="number"] {
           <div class="field">
             <label>Width</label>
             <div class="input-with-unit">
-              <input id="pa_w" class="conv-length" type="number"/>
+              <input id="pa_w" class="conv-length" type="number" value="4"/>
               <select id="u_pa_w" class="unit-select-length">
                 <option value="m">m</option>
                 <option value="ft">ft</option>
@@ -2372,5 +2372,4 @@ function handleContact(){
 </script>
 </body>
 </html>
-
 
