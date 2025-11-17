@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- HOMEPAGE (DiyCivil-Calc) -->
+  <url>
+    <loc>https://diycalculator.calandtimesolutions.com/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
+
+  <!-- CONCRETE CALCULATOR -->
+  <url>
+    <loc>https://diycalculator.calandtimesolutions.com/concrete-calculator</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- STEEL CALCULATOR -->
+  <url>
+    <loc>https://diycalculator.calandtimesolutions.com/steel-calculator</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- BRICKWORK CALCULATOR -->
+  <url>
+    <loc>https://diycalculator.calandtimesolutions.com/brickwork-calculator</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- PLASTERING CALCULATOR -->
+  <url>
+    <loc>https://diycalculator.calandtimesolutions.com/plastering-calculator</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- TILING CALCULATOR -->
+  <url>
+    <loc>https://diycalculator.calandtimesolutions.com/tiling-calculator</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- PAINTING CALCULATOR -->
+  <url>
+    <loc>https://diycalculator.calandtimesolutions.com/painting-calculator</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+</urlset>
