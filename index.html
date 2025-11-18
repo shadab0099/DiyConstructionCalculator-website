@@ -126,6 +126,7 @@
   margin: 0;
   padding: 0;
 }
+
 body {
   font-family: 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
   background: var(--bg);
@@ -1925,8 +1926,7 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
       const hookVal = Number(document.getElementById('s_beam_hook').value)||0;
       const hookUnit = inputUnits['s_beam_hook'];
       const hookMm = (hookUnit === 'mm') ? hookVal : inToMm(hookVal);
-      const stCutMm = 2*(Wmm + Dmm) + 2*hookMm;
-      
+      const stCutMm = 2*((Wmm - 25 - stDia )+ (Dmm - 25 - stDia )) + 2*hookMm - 80;     
       const topWeight = steelWeightPerMeter(topDia) * topCnt * Lm;
       results.push({name: 'Top bars', weight: topWeight});
       
@@ -1966,7 +1966,7 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
       const hookVal = Number(document.getElementById('s_col_hook').value)||0;
       const hookUnit = inputUnits['s_col_hook'];
       const hookMm = (hookUnit === 'mm') ? hookVal : inToMm(hookVal);
-      const tieCutMm = 2*(Wmm + Lmm) + 2*hookMm;
+      const tieCutMm = 2*((Wmm - 40 - tieDia )+ (Lmm - 40 - tieDia )) + 2*hookMm - 80;     
       
       const longWeight = steelWeightPerMeter(longDia) * longCnt * Hm;
       results.push({name: 'Longitudinal bars', weight: longWeight});
@@ -2040,7 +2040,7 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
       const hookVal = Number(document.getElementById('s_lintel_hook').value)||0;
       const hookUnit = inputUnits['s_lintel_hook'];
       const hookMm = (hookUnit === 'mm') ? hookVal : inToMm(hookVal);
-      const stCutMm = 2*(Wmm + Dmm) + 2*hookMm;
+      const stCutMm = 2*((Wmm - 25 - stDia )+ (Dmm - 25 - stDia )) + 2*hookMm - 80;     
       
       const mainWeight = steelWeightPerMeter(mainDia) * mainCnt * Lm;
       results.push({name: 'Main bars', weight: mainWeight});
@@ -2371,9 +2371,4 @@ function handleContact(){
 </script>
 </body>
 </html>
-
-
-
-
-
 
