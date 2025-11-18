@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://diycalculator.calandtimesolutions.com/sitemap.xml
