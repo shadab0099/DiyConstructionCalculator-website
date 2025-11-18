@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <head>
-    <title>DiyCivil-Calc - Online Construction Calculator for Concrete, Steel, Bricks & More</title>
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<title>Construction Calculators - DiyCivil-Calc</title>
     <meta name="description" content="CivilCalc Pro provides powerful online construction calculators for concrete, steel, brickwork, plastering, tiling painting instantly estimates material quantities with high accuracy,">
-</head>
+
 <!-- MAIN WEBSITE SCHEMA -->
 <script type="application/ld+json">
 {
@@ -102,8 +104,6 @@
   "description": "Painting calculator to estimate paint quantity, area coverage, and number of coats needed."
 }
 </script>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Construction Calculators — DiyCivil-Calc</title>
 <style>
 :root {
@@ -1894,238 +1894,252 @@ document.getElementById('calcConcrete').addEventListener('click', ()=>{
 
 // Steel calculate
 document.getElementById('calcSteel').addEventListener('click', ()=>{
-  try{
-    const variant = document.querySelector('#steelTabs .tab.active').getAttribute('data-variant');
-    let totalWeight = 0;
-    let results = [];
-    let calcUnit = 'metric';
-    
-    if(variant === 'beam'){
-      const lenId = 's_beam_len', wId = 's_beam_w', dId = 's_beam_d';
-      const L = Number(document.getElementById(lenId).value);
-      const W = Number(document.getElementById(wId).value);
-      const D = Number(document.getElementById(dId).value);
-      if(!L||!W||!D) throw 'Enter length, width and depth';
-      
-      calcUnit = getCalculationUnit(lenId, wId);
-      const lUnit = inputUnits[lenId];
-      const wUnit = inputUnits[wId];
-      const dUnit = inputUnits[dId];
-      const Lm = (lUnit === 'm') ? L : ftToM(L);
-      const Wmm = (wUnit === 'mm') ? W : inToMm(W);
-      const Dmm = (dUnit === 'mm') ? D : inToMm(D);
-      
-      const topCnt = Number(document.getElementById('s_beam_top_cnt').value)||0;
-      const topDia = Number(document.getElementById('s_beam_top_dia').value)||0;
-      const botCnt = Number(document.getElementById('s_beam_bot_cnt').value)||0;
-      const botDia = Number(document.getElementById('s_beam_bot_dia').value)||0;
-      const stSpaceVal = Number(document.getElementById('s_beam_st_space').value)||0;
-      const stSpaceUnit = inputUnits['s_beam_st_space'];
-      const stSpaceMm = (stSpaceUnit === 'mm') ? stSpaceVal : inToMm(stSpaceVal);
-      const stDia = Number(document.getElementById('s_beam_st_dia').value)||0;
-      const hookVal = Number(document.getElementById('s_beam_hook').value)||0;
-      const hookUnit = inputUnits['s_beam_hook'];
-      const hookMm = (hookUnit === 'mm') ? hookVal : inToMm(hookVal);
-      const stCutMm = 2*((Wmm - 25 - stDia )+ (Dmm - 25 - stDia )) + 2*hookMm - 80;     
-      const topWeight = steelWeightPerMeter(topDia) * topCnt * Lm;
-      results.push({name: 'Top bars', weight: topWeight});
-      
-      const botWeight = steelWeightPerMeter(botDia) * botCnt * Lm;
-      results.push({name: 'Bottom bars', weight: botWeight});
-      
-      const stCount = Math.ceil((Lm*1000)/stSpaceMm);
-      const stirTotalM = (stCutMm * stCount)/1000;
-      const stirWeight = steelWeightPerMeter(stDia) * stirTotalM;
-      results.push({name: 'Stirrups', weight: stirWeight});
-      results.push({name: 'Stirrup Cutting Length', weight: stCutMm, isMm: true});
-      results.push({name: 'No. of Stirrups', weight: stCount, isCount: true});
-      
-      totalWeight = topWeight + botWeight + stirWeight;
-      
-    } else if(variant === 'column'){
-      const hId = 's_col_h', wId = 's_col_w', lId = 's_col_l';
-      const H = Number(document.getElementById(hId).value);
-      const W = Number(document.getElementById(wId).value);
-      const L = Number(document.getElementById(lId).value);
-      if(!H||!W||!L) throw 'Enter height, width and length';
-      
-      calcUnit = getCalculationUnit(hId, wId);
-      const hUnit = inputUnits[hId];
-      const wUnit = inputUnits[wId];
-      const lUnit = inputUnits[lId];
-      const Hm = (hUnit === 'm') ? H : ftToM(H);
-      const Wmm = (wUnit === 'mm') ? W : inToMm(W);
-      const Lmm = (lUnit === 'mm') ? L : inToMm(L);
-      
-      const longCnt = Number(document.getElementById('s_col_long_cnt').value)||0;
-      const longDia = Number(document.getElementById('s_col_long_dia').value)||0;
-      const tieSpaceVal = Number(document.getElementById('s_col_tie_space').value)||0;
-      const tieSpaceUnit = inputUnits['s_col_tie_space'];
-      const tieSpaceMm = (tieSpaceUnit === 'mm') ? tieSpaceVal : inToMm(tieSpaceVal);
-      const tieDia = Number(document.getElementById('s_col_tie_dia').value)||0;
-      const hookVal = Number(document.getElementById('s_col_hook').value)||0;
-      const hookUnit = inputUnits['s_col_hook'];
-      const hookMm = (hookUnit === 'mm') ? hookVal : inToMm(hookVal);
-      const tieCutMm = 2*((Wmm - 40 - tieDia )+ (Lmm - 40 - tieDia )) + 2*hookMm - 80;     
-      
-      const longWeight = steelWeightPerMeter(longDia) * longCnt * Hm;
-      results.push({name: 'Longitudinal bars', weight: longWeight});
-      
-      const tieCount = Math.ceil((Hm*1000)/tieSpaceMm);
-      const tieTotalM = (tieCutMm * tieCount)/1000;
-      const tieWeight = steelWeightPerMeter(tieDia) * tieTotalM;
-      results.push({name: 'Ties', weight: tieWeight});
-      results.push({name: 'Tie Cutting Length', weight: tieCutMm, isMm: true});
-      results.push({name: 'No. of Ties', weight: tieCount, isCount: true});
-      
-      totalWeight = longWeight + tieWeight;
-      
-    } else if(variant === 'slab'){
-      const lId = 's_slab_len', wId = 's_slab_w', tId = 's_slab_t';
-      const L = Number(document.getElementById(lId).value);
-      const W = Number(document.getElementById(wId).value);
-      const T = Number(document.getElementById(tId).value);
-      if(!L||!W||!T) throw 'Enter length, width and thickness';
-      
-      calcUnit = getCalculationUnit(lId, wId);
-      const lUnit = inputUnits[lId];
-      const wUnit = inputUnits[wId];
-      const Lm = (lUnit === 'm') ? L : ftToM(L);
-      const Wm = (wUnit === 'm') ? W : ftToM(W);
-      
-      const mainDia = Number(document.getElementById('s_slab_main_dia').value)||0;
-      const mainSpaceVal = Number(document.getElementById('s_slab_main_space').value)||0;
-      const mainSpaceUnit = inputUnits['s_slab_main_space'];
-      const mainSpaceMm = (mainSpaceUnit === 'mm') ? mainSpaceVal : inToMm(mainSpaceVal);
-      const distDia = Number(document.getElementById('s_slab_dist_dia').value)||0;
-      const distSpaceVal = Number(document.getElementById('s_slab_dist_space').value)||0;
-      const distSpaceUnit = inputUnits['s_slab_dist_space'];
-      const distSpaceMm = (distSpaceUnit === 'mm') ? distSpaceVal : inToMm(distSpaceVal);
-      
-      const mainCount = Math.ceil((Wm*1000)/mainSpaceMm);
-      const mainTotalLength = mainCount * Lm;
-      const mainWeight = steelWeightPerMeter(mainDia) * mainTotalLength;
-      results.push({name: 'Main bars', weight: mainWeight});
-      results.push({name: 'No. of Main bars', weight: mainCount, isCount: true});
-      
-      const distCount = Math.ceil((Lm*1000)/distSpaceMm);
-      const distTotalLength = distCount * Wm;
-      const distWeight = steelWeightPerMeter(distDia) * distTotalLength;
-      results.push({name: 'Distribution bars', weight: distWeight});
-      results.push({name: 'No. of Dist. bars', weight: distCount, isCount: true});
-      
-      totalWeight = mainWeight + distWeight;
-      
-    } else if(variant === 'lintel'){
-      const lId = 's_lintel_len', wId = 's_lintel_w', dId = 's_lintel_d';
-      const L = Number(document.getElementById(lId).value);
-      const W = Number(document.getElementById(wId).value);
-      const D = Number(document.getElementById(dId).value);
-      if(!L||!W||!D) throw 'Enter length, width and depth';
-      
-      calcUnit = getCalculationUnit(lId, wId);
-      const lUnit = inputUnits[lId];
-      const wUnit = inputUnits[wId];
-      const dUnit = inputUnits[dId];
-      const Lm = (lUnit === 'm') ? L : ftToM(L);
-      const Wmm = (wUnit === 'mm') ? W : inToMm(W);
-      const Dmm = (dUnit === 'mm') ? D : inToMm(D);
-      
-      const mainCnt = Number(document.getElementById('s_lintel_main_cnt').value)||0;
-      const mainDia = Number(document.getElementById('s_lintel_main_dia').value)||0;
-      const stSpaceVal = Number(document.getElementById('s_lintel_st_space').value)||0;
-      const stSpaceUnit = inputUnits['s_lintel_st_space'];
-      const stSpaceMm = (stSpaceUnit === 'mm') ? stSpaceVal : inToMm(stSpaceVal);
-      const stDia = Number(document.getElementById('s_lintel_st_dia').value)||0;
-      const hookVal = Number(document.getElementById('s_lintel_hook').value)||0;
-      const hookUnit = inputUnits['s_lintel_hook'];
-      const hookMm = (hookUnit === 'mm') ? hookVal : inToMm(hookVal);
-      const stCutMm = 2*((Wmm - 25 - stDia )+ (Dmm - 25 - stDia )) + 2*hookMm - 80;     
-      
-      const mainWeight = steelWeightPerMeter(mainDia) * mainCnt * Lm;
-      results.push({name: 'Main bars', weight: mainWeight});
-      
-      const stCount = Math.ceil((Lm*1000)/stSpaceMm);
-      const stirTotalM = (stCutMm * stCount)/1000;
-      const stirWeight = steelWeightPerMeter(stDia) * stirTotalM;
-      results.push({name: 'Stirrups', weight: stirWeight});
-      results.push({name: 'Stirrup Cutting Length', weight: stCutMm, isMm: true});
-      results.push({name: 'No. of Stirrups', weight: stCount, isCount: true});
-      
-      totalWeight = mainWeight + stirWeight;
-      
-    } else if(variant === 'footing'){
-      const lId = 's_footing_len', wId = 's_footing_w', dId = 's_footing_d';
-      const L = Number(document.getElementById(lId).value);
-      const W = Number(document.getElementById(wId).value);
-      const D = Number(document.getElementById(dId).value);
-      if(!L||!W||!D) throw 'Enter length, width and depth';
-      
-      calcUnit = getCalculationUnit(lId, wId);
-      const lUnit = inputUnits[lId];
-      const wUnit = inputUnits[wId];
-      const Lm = (lUnit === 'm') ? L : ftToM(L);
-      const Wm = (wUnit === 'm') ? W : ftToM(W);
-      
-      const mainDia = Number(document.getElementById('s_footing_main_dia').value)||0;
-      const mainSpaceVal = Number(document.getElementById('s_footing_main_space').value)||0;
-      const mainSpaceUnit = inputUnits['s_footing_main_space'];
-      const mainSpaceMm = (mainSpaceUnit === 'mm') ? mainSpaceVal : inToMm(mainSpaceVal);
-      const distDia = Number(document.getElementById('s_footing_dist_dia').value)||0;
-      const distSpaceVal = Number(document.getElementById('s_footing_dist_space').value)||0;
-      const distSpaceUnit = inputUnits['s_footing_dist_space'];
-      const distSpaceMm = (distSpaceUnit === 'mm') ? distSpaceVal : inToMm(distSpaceVal);
-      
-      const mainCount = Math.ceil((Wm*1000)/mainSpaceMm);
-      const mainTotalLength = mainCount * Lm;
-      const mainWeight = steelWeightPerMeter(mainDia) * mainTotalLength;
-      results.push({name: 'Main bars', weight: mainWeight});
-      results.push({name: 'No. of Main bars', weight: mainCount, isCount: true});
-      
-      const distCount = Math.ceil((Lm*1000)/distSpaceMm);
-      const distTotalLength = distCount * Wm;
-      const distWeight = steelWeightPerMeter(distDia) * distTotalLength;
-      results.push({name: 'Distribution bars', weight: distWeight});
-      results.push({name: 'No. of Dist. bars', weight: distCount, isCount: true});
-      
-      totalWeight = mainWeight + distWeight;
-    }
-    
-    const totalWithWastage = totalWeight * 1.03;
-    
-    const out = document.getElementById('steelResults'); 
-    out.innerHTML = '';
-    const tbl = document.createElement('table'); 
-    tbl.className = 'results-table';
-    
-    tbl.innerHTML = '<tr><th>Component</th><th>Value</th><th>Unit</th></tr>';
-    
-    results.forEach(item => {
-      if(item.isCount) {
-        tbl.innerHTML += `<tr><td>${item.name}</td><td>${item.weight}</td><td>nos</td></tr>`;
-      } else if(item.isMm) {
-        tbl.innerHTML += `<tr><td>${item.name}</td><td>${round(item.weight, 2)}</td><td>mm</td></tr>`;
-      } else if(calcUnit === 'metric') {
-        tbl.innerHTML += `<tr><td>${item.name}</td><td>${round(item.weight, 2)}</td><td>kg</td></tr>`;
-      } else {
-        tbl.innerHTML += `<tr><td>${item.name}</td><td>${round(kgToLb(item.weight), 2)}</td><td>lb</td></tr>`;
-      }
-    });
-    
-    if(calcUnit === 'metric') {
-      tbl.innerHTML += `<tr><td><strong>Total (with 3% wastage)</strong></td><td><strong>${round(totalWithWastage, 2)}</strong></td><td><strong>kg</strong></td></tr>`;
-    } else {
-      tbl.innerHTML += `<tr><td><strong>Total (with 3% wastage)</strong></td><td><strong>${round(kgToLb(totalWithWastage), 2)}</strong></td><td><strong>lb</strong></td></tr>`;
-    }
-    
-    out.appendChild(tbl);
-    showToast('Steel calculation completed!', 'success');
-    
-  } catch(err) { 
-    showToast('Error: ' + err, 'error'); 
-  }
-});
+    try{
+        const variant = document.querySelector('#steelTabs .tab.active').getAttribute('data-variant');
+        let totalWeight = 0;
+        let results = [];
+        let calcUnit = 'metric';
 
+        if(variant === 'beam'){
+            const lenId = 's_beam_len', wId = 's_beam_w', dId = 's_beam_d';
+            const L = Number(document.getElementById(lenId).value);
+            const W = Number(document.getElementById(wId).value);
+            const D = Number(document.getElementById(dId).value);
+            if(!L||!W||!D) throw 'Enter length, width and depth';
+            calcUnit = getCalculationUnit(lenId, wId);
+            const lUnit = inputUnits[lenId];
+            const wUnit = inputUnits[wId];
+            const dUnit = inputUnits[dId];
+            const Lm = (lUnit === 'm') ? L : ftToM(L);
+            const Wmm = (wUnit === 'mm') ? W : inToMm(W);
+            const Dmm = (dUnit === 'mm') ? D : inToMm(D);
+
+            const topCnt = Number(document.getElementById('s_beam_top_cnt').value)||0;
+            const topDia = Number(document.getElementById('s_beam_top_dia').value)||0;
+            const botCnt = Number(document.getElementById('s_beam_bot_cnt').value)||0;
+            const botDia = Number(document.getElementById('s_beam_bot_dia').value)||0;
+            const stSpaceVal = Number(document.getElementById('s_beam_st_space').value)||0;
+            const stSpaceUnit = inputUnits['s_beam_st_space'];
+            const stSpaceMm = (stSpaceUnit === 'mm') ? stSpaceVal : inToMm(stSpaceVal);
+            const stDia = Number(document.getElementById('s_beam_st_dia').value)||0;
+            const hookVal = Number(document.getElementById('s_beam_hook').value)||0;
+            const hookUnit = inputUnits['s_beam_hook'];
+            const hookMm = (hookUnit === 'mm') ? hookVal : inToMm(hookVal);
+
+            const stCutMm = 2*((Wmm - 25 - stDia )+ (Dmm - 25 - stDia )) + 2*hookMm - 80;
+            const topWeight = steelWeightPerMeter(topDia) * topCnt * Lm;
+            results.push({name: 'Top bars', weight: topWeight});
+            const botWeight = steelWeightPerMeter(botDia) * botCnt * Lm;
+            results.push({name: 'Bottom bars', weight: botWeight});
+            const stCount = Math.ceil((Lm*1000)/stSpaceMm);
+            const stirTotalM = (stCutMm * stCount)/1000;
+            const stirWeight = steelWeightPerMeter(stDia) * stirTotalM;
+            results.push({name: 'Stirrups', weight: stirWeight});
+            results.push({name: 'Stirrup Cutting Length', weight: stCutMm, isMm: true});
+            results.push({name: 'No. of Stirrups', weight: stCount, isCount: true});
+            totalWeight = topWeight + botWeight + stirWeight;
+
+        } else if(variant === 'column'){
+            const hId = 's_col_h', wId = 's_col_w', lId = 's_col_l';
+            const H = Number(document.getElementById(hId).value);
+            const W = Number(document.getElementById(wId).value);
+            const L = Number(document.getElementById(lId).value);
+            if(!H||!W||!L) throw 'Enter height, width and length';
+            calcUnit = getCalculationUnit(hId, wId);
+            const hUnit = inputUnits[hId];
+            const wUnit = inputUnits[wId];
+            const lUnit = inputUnits[lId];
+            const Hm = (hUnit === 'm') ? H : ftToM(H);
+            const Wmm = (wUnit === 'mm') ? W : inToMm(W);
+            const Lmm = (lUnit === 'mm') ? L : inToMm(L);
+
+            const longCnt = Number(document.getElementById('s_col_long_cnt').value)||0;
+            const longDia = Number(document.getElementById('s_col_long_dia').value)||0;
+            const tieSpaceVal = Number(document.getElementById('s_col_tie_space').value)||0;
+            const tieSpaceUnit = inputUnits['s_col_tie_space'];
+            const tieSpaceMm = (tieSpaceUnit === 'mm') ? tieSpaceVal : inToMm(tieSpaceVal);
+            const tieDia = Number(document.getElementById('s_col_tie_dia').value)||0;
+            const hookVal = Number(document.getElementById('s_col_hook').value)||0;
+            const hookUnit = inputUnits['s_col_hook'];
+            const hookMm = (hookUnit === 'mm') ? hookVal : inToMm(hookVal);
+
+            const tieCutMm = 2*((Wmm - 40 - tieDia )+ (Lmm - 40 - tieDia )) + 2*hookMm - 80;
+            const longWeight = steelWeightPerMeter(longDia) * longCnt * Hm;
+            results.push({name: 'Longitudinal bars', weight: longWeight});
+            const tieCount = Math.ceil((Hm*1000)/tieSpaceMm);
+            const tieTotalM = (tieCutMm * tieCount)/1000;
+            const tieWeight = steelWeightPerMeter(tieDia) * tieTotalM;
+            results.push({name: 'Ties', weight: tieWeight});
+            results.push({name: 'Tie Cutting Length', weight: tieCutMm, isMm: true});
+            results.push({name: 'No. of Ties', weight: tieCount, isCount: true});
+            totalWeight = longWeight + tieWeight;
+
+        } else if(variant === 'slab'){
+            const lId = 's_slab_len', wId = 's_slab_w', tId = 's_slab_t';
+            const L = Number(document.getElementById(lId).value);
+            const W = Number(document.getElementById(wId).value);
+            const T = Number(document.getElementById(tId).value);
+            if(!L||!W||!T) throw 'Enter length, width and thickness';
+            calcUnit = getCalculationUnit(lId, wId);
+            const lUnit = inputUnits[lId];
+            const wUnit = inputUnits[wId];
+            const Lm = (lUnit === 'm') ? L : ftToM(L);
+            const Wm = (wUnit === 'm') ? W : ftToM(W);
+
+            const mainDia = Number(document.getElementById('s_slab_main_dia').value)||0;
+            const mainSpaceVal = Number(document.getElementById('s_slab_main_space').value)||0;
+            const mainSpaceUnit = inputUnits['s_slab_main_space'];
+            const mainSpaceMm = (mainSpaceUnit === 'mm') ? mainSpaceVal : inToMm(mainSpaceVal);
+            const distDia = Number(document.getElementById('s_slab_dist_dia').value)||0;
+            const distSpaceVal = Number(document.getElementById('s_slab_dist_space').value)||0;
+            const distSpaceUnit = inputUnits['s_slab_dist_space'];
+            const distSpaceMm = (distSpaceUnit === 'mm') ? distSpaceVal : inToMm(distSpaceVal);
+
+            const mainCount = Math.ceil((Wm*1000)/mainSpaceMm);
+            const mainTotalLength = mainCount * Lm;
+            const mainWeight = steelWeightPerMeter(mainDia) * mainTotalLength;
+            results.push({name: 'Main bars', weight: mainWeight});
+            results.push({name: 'No. of Main bars', weight: mainCount, isCount: true});
+            const distCount = Math.ceil((Lm*1000)/distSpaceMm);
+            const distTotalLength = distCount * Wm;
+            const distWeight = steelWeightPerMeter(distDia) * distTotalLength;
+            results.push({name: 'Distribution bars', weight: distWeight});
+            results.push({name: 'No. of Dist. bars', weight: distCount, isCount: true});
+            totalWeight = mainWeight + distWeight;
+
+        } else if(variant === 'lintel'){
+            const lId = 's_lintel_len', wId = 's_lintel_w', dId = 's_lintel_d';
+            const L = Number(document.getElementById(lId).value);
+            const W = Number(document.getElementById(wId).value);
+            const D = Number(document.getElementById(dId).value);
+            if(!L||!W||!D) throw 'Enter length, width and depth';
+            calcUnit = getCalculationUnit(lId, wId);
+            const lUnit = inputUnits[lId];
+            const wUnit = inputUnits[wId];
+            const dUnit = inputUnits[dId];
+            const Lm = (lUnit === 'm') ? L : ftToM(L);
+            const Wmm = (wUnit === 'mm') ? W : inToMm(W);
+            const Dmm = (dUnit === 'mm') ? D : inToMm(D);
+
+            const mainCnt = Number(document.getElementById('s_lintel_main_cnt').value)||0;
+            const mainDia = Number(document.getElementById('s_lintel_main_dia').value)||0;
+            const stSpaceVal = Number(document.getElementById('s_lintel_st_space').value)||0;
+            const stSpaceUnit = inputUnits['s_lintel_st_space'];
+            const stSpaceMm = (stSpaceUnit === 'mm') ? stSpaceVal : inToMm(stSpaceVal);
+            const stDia = Number(document.getElementById('s_lintel_st_dia').value)||0;
+            const hookVal = Number(document.getElementById('s_lintel_hook').value)||0;
+            const hookUnit = inputUnits['s_lintel_hook'];
+            const hookMm = (hookUnit === 'mm') ? hookVal : inToMm(hookVal);
+
+            const stCutMm = 2*((Wmm - 25 - stDia )+ (Dmm - 25 - stDia )) + 2*hookMm - 80;
+            const mainWeight = steelWeightPerMeter(mainDia) * mainCnt * Lm;
+            results.push({name: 'Main bars', weight: mainWeight});
+            const stCount = Math.ceil((Lm*1000)/stSpaceMm);
+            const stirTotalM = (stCutMm * stCount)/1000;
+            const stirWeight = steelWeightPerMeter(stDia) * stirTotalM;
+            results.push({name: 'Stirrups', weight: stirWeight});
+            results.push({name: 'Stirrup Cutting Length', weight: stCutMm, isMm: true});
+            results.push({name: 'No. of Stirrups', weight: stCount, isCount: true});
+            totalWeight = mainWeight + stirWeight;
+
+        } else if(variant === 'footing'){
+            const lId = 's_footing_len', wId = 's_footing_w', dId = 's_footing_d';
+            const L = Number(document.getElementById(lId).value);
+            const W = Number(document.getElementById(wId).value);
+            const D = Number(document.getElementById(dId).value);
+            if(!L||!W||!D) throw 'Enter length, width and depth';
+            calcUnit = getCalculationUnit(lId, wId);
+            const lUnit = inputUnits[lId];
+            const wUnit = inputUnits[wId];
+            const Lm = (lUnit === 'm') ? L : ftToM(L);
+            const Wm = (wUnit === 'm') ? W : ftToM(W);
+
+            const mainDia = Number(document.getElementById('s_footing_main_dia').value)||0;
+            const mainSpaceVal = Number(document.getElementById('s_footing_main_space').value)||0;
+            const mainSpaceUnit = inputUnits['s_footing_main_space'];
+            const mainSpaceMm = (mainSpaceUnit === 'mm') ? mainSpaceVal : inToMm(mainSpaceVal);
+            const distDia = Number(document.getElementById('s_footing_dist_dia').value)||0;
+            const distSpaceVal = Number(document.getElementById('s_footing_dist_space').value)||0;
+            const distSpaceUnit = inputUnits['s_footing_dist_space'];
+            const distSpaceMm = (distSpaceUnit === 'mm') ? distSpaceVal : inToMm(distSpaceVal);
+
+            const mainCount = Math.ceil((Wm*1000)/mainSpaceMm);
+            const mainTotalLength = mainCount * Lm;
+            const mainWeight = steelWeightPerMeter(mainDia) * mainTotalLength;
+            results.push({name: 'Main bars', weight: mainWeight});
+            results.push({name: 'No. of Main bars', weight: mainCount, isCount: true});
+            const distCount = Math.ceil((Lm*1000)/distSpaceMm);
+            const distTotalLength = distCount * Wm;
+            const distWeight = steelWeightPerMeter(distDia) * distTotalLength;
+            results.push({name: 'Distribution bars', weight: distWeight});
+            results.push({name: 'No. of Dist. bars', weight: distCount, isCount: true});
+            totalWeight = mainWeight + distWeight;
+        }
+
+        const totalWithWastage = totalWeight * 1.03;
+        const out = document.getElementById('steelResults');
+        out.innerHTML = '';
+        const tbl = document.createElement('table');
+        tbl.className = 'results-table';
+        
+        // Updated table header for dual units
+        tbl.innerHTML = `
+            <tr>
+                <th>Component</th>
+                <th>Weight (kg)</th>
+                <th>Weight (lbs)</th>
+                <th>Additional Info</th>
+            </tr>
+        `;
+        
+        results.forEach(item => {
+            if(item.isCount) {
+                tbl.innerHTML += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>${item.weight} nos</td>
+                    </tr>
+                `;
+            } else if(item.isMm) {
+                tbl.innerHTML += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>${round(item.weight, 2)} mm</td>
+                    </tr>
+                `;
+            } else {
+                // Show weight in both kg and lbs for all steel components
+                tbl.innerHTML += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${round(item.weight, 2)} kg</td>
+                        <td>${round(kgToLb(item.weight), 2)} lbs</td>
+                        <td>-</td>
+                    </tr>
+                `;
+            }
+        });
+
+        // Total row with both units
+        tbl.innerHTML += `
+            <tr>
+                <td><strong>Total Steel (with 3% wastage)</strong></td>
+                <td><strong>${round(totalWithWastage, 2)} kg</strong></td>
+                <td><strong>${round(kgToLb(totalWithWastage), 2)} lbs</strong></td>
+                <td>-</td>
+            </tr>
+        `;
+
+        out.appendChild(tbl);
+        showToast('Steel calculation completed!', 'success');
+    } catch(err) {
+        showToast('Error: ' + err, 'error');
+    }
+});
 // Brick handlers
 document.getElementById('b_size').addEventListener('change', (e)=>{
   const show = e.target.value==='custom';
