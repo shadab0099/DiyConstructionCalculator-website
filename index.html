@@ -152,7 +152,7 @@ header {
 .menu-btn {
   background: transparent;
   border: none;
-  color: #ffffff;
+  color: #FFFFFF;
   font-size: 22px;
   cursor: pointer;
   padding: 6px;
@@ -619,11 +619,11 @@ input[type="number"] {
       <!-- Concrete -->
       <section id="concrete" class="card section">
         <h2>Concrete - DiyCivil-Calc | Cement, Sand & Aggregate Estimator</h2>
-
         <div class="tabs" id="concreteTabs">
           <div class="tab active" data-variant="beam">Beam</div>
           <div class="tab" data-variant="column">Column</div>
           <div class="tab" data-variant="slab">Slab</div>
+          
           <div class="tab" data-variant="footing">Footing</div>
           <div class="tab" data-variant="lintel">Lintel</div>
         </div>
@@ -700,6 +700,7 @@ input[type="number"] {
           </div>
 
           <div class="variant hidden" id="con-slab">
+            
             <div class="controls">
               <div class="field">
                 <label>Length</label>
@@ -734,7 +735,7 @@ input[type="number"] {
             </div>
           </div>
 
-          <div class="variant hidden" id="con-footing">
+                  <div class="variant hidden" id="con-footing">
             <div class="controls">
               <div class="field">
                 <label>Length</label>
@@ -824,15 +825,569 @@ input[type="number"] {
             <label>W/C ratio</label>
             <input id="c_wcr" type="number" step="any" value="0.42" />
           </div>
+          <div class="field">
+            <label>Wastage (%)</label>
+            <select id="c_wastage">
+              <option value="4" selected>4% (Standard)</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+          <div class="field hidden" id="c_wastage_custom_row">
+            <label>Custom Wastage (%)</label>
+            <input id="c_wastage_custom" type="number" step="0.1" value="4" min="0" max="100" />
+          </div>
         </div>
 
         <div style="display:flex;gap:12px;align-items:center;margin-top:16px">
-          <button clas - s="btn" id="calcConcrete">Calculate</button>
-          <div class="wastage-badge">Wastage: 2%</div>
+          <button class="btn" id="calcConcrete">Calculate</button>
+          <div class="wastage-badge" id="concreteWastageBadge">Wastage: 4%</div>
         </div>
 
         <div id="concreteResults" class="card" style="margin-top:20px"></div>
-      </section>
+
+      
+
+        <div class="card example-section" id="example-con-beam" style="margin-top:20px; background-color: #f0f9ff; border-left: 4px solid var(--accent);">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Beam Concrete Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <ul style="margin-left: 20px;">
+              <h3>Concrete Calculation for Beam (10 ft × 9 in × 18 in) – With Density & Mix Ratios</h3>
+
+
+<h3><em>1. Convert All Dimensions Into Feet</em></h3>
+<ul>
+<li>Length = 10 ft</li>
+<li>Width = 9 in ÷ 12 = <strong>0.75 ft</strong></li>
+<li>Depth = 18 in ÷ 12 = <strong>1.5 ft</strong></li>
+</ul>
+
+<h3>2. Wet Concrete Volume</h3>
+<p>Wet Volume = Length × Width × Depth</p>
+<p>= 10 ft × 0.75 ft × 1.5 ft<br>
+= <strong>11.25 cubic feet</strong> (0.318 m³)</p>
+
+<h3>3. Dry Concrete Volume</h3>
+<p>Standard concrete dry factor = <strong>1.54</strong></p>
+<p>Dry Volume = 11.25 × 1.54 = <strong>17.33 cu.ft</strong> (0.491 m³)</p>
+
+<h3>4. Material Densities Used</h3>
+<ul>
+<li><strong>Cement:</strong> 1440 kg/m³</li>
+<li><strong>Sand:</strong> 1600 kg/m³</li>
+<li><strong>Aggregate:</strong> 1500 kg/m³</li>
+</ul>
+
+<h3>5. Mix Ratio Used for Detailed Calculation (M20 – 1:1.5:3)</h3>
+<p>Total parts = 5.5</p>
+
+<h3>Cement</h3>
+<ul>
+<li>Volume = (1 / 5.5) × 17.33 = <strong>3.15 cu.ft</strong></li>
+<li>Volume in m³ = 0.0892 m³</li>
+<li>Weight = 0.0892 × 1440 = <strong>128.45 kg</strong></li>
+<li>50-kg bags = <strong>3 bags</strong></li>
+</ul>
+
+<h3>Sand</h3>
+<ul>
+<li>Volume = <strong>4.72 cu.ft</strong></li>
+<li>Volume in m³ = 0.1336 m³</li>
+</ul>
+
+<h3>Aggregate</h3>
+<ul>
+<li>Volume = <strong>9.45 cu.ft</strong></li>
+<li>Volume in m³ = 0.267 m³</li>
+</ul>
+
+<h3>6. Final Material Summary (M20 Mix) with 4 percent wastage</h3>
+<ul>
+<li><strong>Wet Concrete:</strong> 11.25 cu.ft (0.318 m³)</li>
+<li><strong>Dry Concrete:</strong> 17.33 cu.ft (0.491 m³)</li>
+<li><strong>Cement:</strong> 3 bags (128 kg)</li>
+<li><strong>Sand:</strong> 4.91 cu.ft (0.1391 m³)</li>
+<li><strong>Aggregate:</strong> 9.83 cu.ft (0.278 m³)</li>
+</ul>
+
+<h3>7. Other Popular Concrete Mix Ratios</h3>
+
+<h3>M7.5 (1:4:8)</h3>
+<ul>
+<li>Total parts = 13</li>
+<li>Cement = 7.69%</li>
+<li>Sand = 30.77%</li>
+<li>Aggregate = 61.54%</li>
+</ul>
+
+<h3>M10 (1:3:6)</h3>
+<ul>
+<li>Total parts = 10</li>
+<li>Cement = 10%</li>
+<li>Sand = 30%</li>
+<li>Aggregate = 60%</li>
+</ul>
+
+<h3>M15 (1:2:4)</h3>
+<ul>
+<li>Total parts = 7</li>
+<li>Cement = 14.28%</li>
+<li>Sand = 28.57%</li>
+<li>Aggregate = 57.14%</li>
+</ul>
+
+<h3>M20 (1:1.5:3)</h3>
+<ul>
+<li>Total parts = 5.5</li>
+<li>Cement = 18.18%</li>
+<li>Sand = 27.27%</li>
+<li>Aggregate = 54.54%</li>
+</ul>
+
+<h3>M25 (1:1:2)</h3>
+<ul>
+<li>Total parts = 4</li>
+<li>Cement = 25%</li>
+<li>Sand = 25%</li>
+<li>Aggregate = 50%</li>
+</ul>
+
+
+            </ul>
+            <p><em>Note: Beam concrete typically uses M20 or M25 grade with proper reinforcement.</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-con-column" style="margin-top:20px; background-color: #f0f9ff; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Column Concrete Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <ul style="margin-left: 20px;">
+              <h3>Concrete Calculation for Column (10 ft × 9 in × 18 in) – With Density & Mix Ratios</h3>
+
+
+<h3><em>1. Convert All Dimensions Into Feet</em></h3>
+<ul>
+<li>Height = 10 ft</li>
+<li>Width = 9 in ÷ 12 = <strong>0.75 ft</strong></li>
+<li>Length = 18 in ÷ 12 = <strong>1.5 ft</strong></li>
+</ul>
+
+<h3>2. Wet Concrete Volume</h3>
+<p>Wet Volume = Height × Width × Length</p>
+<p>= 10 ft × 0.75 ft × 1.5 ft<br>
+= <strong>11.25 cu.ft</strong> (0.318 m³)</p>
+
+<h3>3. Dry Concrete Volume</h3>
+<p>Standard dry volume factor = <strong>1.54</strong></p>
+<p>Dry Volume = 11.25 × 1.54 = <strong>17.33 cu.ft</strong> (0.491 m³)</p>
+
+<h3>4. Material Densities Used</h3>
+<ul>
+<li><strong>Cement:</strong> 1440 kg/m³</li>
+<li><strong>Sand:</strong> 1600 kg/m³</li>
+<li><strong>Aggregate:</strong> 1500 kg/m³</li>
+</ul>
+
+<h3>5. Mix Ratio Used for Detailed Calculation (M20 – 1:1.5:3)</h3>
+<p>Total parts = 5.5</p>
+
+<h3>Cement</h3>
+<ul>
+<li>Volume = (1 / 5.5) × 17.33 = <strong>3.15 cu.ft</strong></li>
+<li>Volume in m³ = 0.0892 m³</li>
+<li>Weight = 0.0892 × 1440 = <strong>128.45 kg</strong></li>
+<li>50-kg bags = <strong>3 bags</strong></li>
+</ul>
+
+<h3>Sand</h3>
+<ul>
+<li>Volume = <strong>4.72 cu.ft</strong></li>
+<li>Volume in m³ = 0.1336 m³</li>
+</ul>
+
+<h3>Aggregate</h3>
+<ul>
+<li>Volume = <strong>9.45 cu.ft</strong></li>
+<li>Volume in m³ = 0.267 m³</li>
+</ul>
+
+<h3>6. Final Material Summary (M20 Mix) with 4 percent wastage</h3>
+<ul>
+<li><strong>Wet Concrete:</strong> 11.25 cu.ft (0.318 m³)</li>
+<li><strong>Dry Concrete:</strong> 17.33 cu.ft (0.491 m³)</li>
+<li><strong>Cement:</strong> 3 bags (128 kg)</li>
+<li><strong>Sand:</strong> 4.91 cu.ft (0.139 m³)</li>
+<li><strong>Aggregate:</strong> 9.828 cu.ft (0.278 m³)</li>
+</ul>
+
+<h3>7. Other Concrete Mix Ratios (Quick Reference)</h3>
+
+<h3>M7.5 (1:4:8)</h3>
+<ul>
+<li>Total parts = 13</li>
+<li>Cement = 7.69%</li>
+<li>Sand = 30.77%</li>
+<li>Aggregate = 61.54%</li>
+</ul>
+
+<h3>M10 (1:3:6)</h3>
+<ul>
+<li>Total parts = 10</li>
+<li>Cement = 10%</li>
+<li>Sand = 30%</li>
+<li>Aggregate = 60%</li>
+</ul>
+
+<h3>M15 (1:2:4)</h3>
+<ul>
+<li>Total parts = 7</li>
+<li>Cement = 14.28%</li>
+<li>Sand = 28.57%</li>
+<li>Aggregate = 57.14%</li>
+</ul>
+
+<h3>M20 (1:1.5:3)</h3>
+<ul>
+<li>Total parts = 5.5</li>
+<li>Cement = 18.18%</li>
+<li>Sand = 27.27%</li>
+<li>Aggregate = 54.54%</li>
+</ul>
+
+<h3>M25 (1:1:2)</h3>
+<ul>
+<li>Total parts = 4</li>
+<li>Cement = 25%</li>
+<li>Sand = 25%</li>
+<li>Aggregate = 50%</li>
+</ul>
+
+
+            </ul>
+            <p><em>Note: Columns usually require M25 or M30 grade for structural strength.</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-con-slab" style="margin-top:20px; background-color: #f0f9ff; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Slab Concrete Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <ul style="margin-left: 20px;">
+              <div class="card"><h3>Concrete Calculation for a 1000 sq.ft Slab (4.5-inch Thick) M20 (1:1.5:3)</h3></h3><p><p></p>
+
+<h3><em>1. Convert Slab Thickness</em></h3>
+<p>4.5 inches ÷ 12 = <strong>0.375 ft</strong></p>
+
+<h3>2. Wet Concrete Volume</h3>
+<p>Wet Volume = Area × Thickness<br>
+= 1000 sq.ft × 0.375 ft<br>
+= <strong>375 cu.ft</strong> (10.62 m³)</p>
+
+<h3>3. Dry Concrete Volume</h3>
+<p>Standard dry volume factor = <strong>1.54</strong></p>
+<p>Dry Volume = 375 × 1.54 = <strong>577.5 cu.ft</strong> (16.35 m³)</p>
+
+<h3>4. Material Densities Used</h3>
+<ul>
+<li><strong>Cement:</strong> 1440 kg/m³</li>
+<li><strong>Sand:</strong> 1600 kg/m³</li>
+<li><strong>Aggregate:</strong> 1500 kg/m³</li>
+</ul>
+
+<h3>5. Mix Ratio Used for Detailed Calculation (M20 – 1:1.5:3)</h3>
+<p>Total parts = 5.5</p>
+
+<h3>Cement</h3>
+<ul>
+<li>Volume = (1/5.5) × 577.5 = <strong>105 cu.ft</strong></li>
+<li>Volume in m³ = 2.97 m³</li>
+<li>Weight = 2.97 × 1440 = <strong>4,282 kg</strong></li>
+<li>50-kg bags = <strong>86 bags</strong></li>
+</ul>
+
+<h3>Sand</h3>
+<ul>
+<li>Volume = <strong>157.5 cu.ft</strong></li>
+<li>Volume in m³ = 4.46 m³</li>
+</ul>
+
+<h3>Aggregate</h3>
+<ul>
+<li>Volume = <strong>315 cu.ft</strong></li>
+<li>Volume in m³ = 8.92 m³</li>
+</ul>
+
+<h3>6. Final Material Summary for M20 Mix with 4 percent wastage</h3>
+<ul>
+<li><strong>Wet Concrete:</strong> 375 cu.ft (10.62 m³)</li>
+<li><strong>Dry Concrete:</strong> 577.5 cu.ft (16.35 m³)</li>
+<li><strong>Cement:</strong> 86 bags (50 kg each)</li>
+<li><strong>Sand:</strong> 163.8 cu.ft (4.63 m³)</li>
+<li><strong>Aggregate:</strong> 315 cu.ft (8.92 m³)</li>
+</ul>
+
+<h3>7.Other Mix Ratios for Quick Reference</h3>
+
+<h3>M7.5 (1:4:8)</h3>
+<ul>
+<li>Total parts = 13</li>
+<li>Cement = 1/13 = 7.69%</li>
+<li>Sand = 4/13 = 30.77%</li>
+<li>Aggregate = 8/13 = 61.54%</li>
+</ul>
+
+<h3>M10 (1:3:6)</h3>
+<ul>
+<li>Total parts = 10</li>
+<li>Cement = 10%</li>
+<li>Sand = 30%</li>
+<li>Aggregate = 60%</li>
+</ul>
+
+<h3>M15 (1:2:4)</h3>
+<ul>
+<li>Total parts = 7</li>
+<li>Cement = 14.28%</li>
+<li>Sand = 28.57%</li>
+<li>Aggregate = 57.14%</li>
+</ul>
+
+<h3>M20 (1:1.5:3)</h3>
+<ul>
+<li>Total parts = 5.5</li>
+<li>Cement = 18.18%</li>
+<li>Sand = 27.27%</li>
+<li>Aggregate = 54.54%</li>
+</ul>
+
+<h3>M25 (1:1:2)</h3>
+<ul>
+<li>Total parts = 4</li>
+<li>Cement = 25%</li>
+<li>Sand = 25%</li>
+<li>Aggregate = 50%</li>
+</ul>
+
+
+            </ul>
+            <p><em>Note: Slab thickness varies: 125mm for 3m span, 150mm for 4-5m span.</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-con-footing" style="margin-top:20px; background-color: #f0f9ff; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Footing Concrete Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <ul style="margin-left: 20px;">
+              <h3>Concrete Calculation for Footing (5 ft × 5 ft × 6 in) – With Density & Mix Ratios</h1>
+
+
+<h3>1. Convert Thickness Into Feet</h3>
+<p>6 inches ÷ 12 = <strong>0.5 ft</strong></p>
+
+<h3>2. Wet Concrete Volume</h3>
+<p>Wet Volume = Length × Width × Thickness</p>
+<p>= 5 ft × 5 ft × 0.5 ft<br>
+= <strong>12.5 cu.ft</strong> (0.354 m³)</p>
+
+<h3>3. Dry Concrete Volume</h3>
+<p>Standard dry factor = <strong>1.54</strong></p>
+<p>Dry Volume = 12.5 × 1.54 = <strong>19.25 cu.ft</strong> (0.545 m³)</p>
+
+<h3>4. Material Densities Used</h3>
+<ul>
+<li><strong>Cement:</strong> 1440 kg/m³</li>
+<li><strong>Sand:</strong> 1600 kg/m³</li>
+<li><strong>Aggregate:</strong> 1500 kg/m³</li>
+</ul>
+
+<h3>5. Mix Ratio Used for Detailed Calculation (M20 – 1:1.5:3)</h3>
+<p>Total parts = 5.5</p>
+
+<h3>Cement</h3>
+<ul>
+<li>Volume = (1 / 5.5) × 19.25 = <strong>3.5 cu.ft</strong></li>
+<li>Volume in m³ = 0.0991 m³</li>
+<li>Weight = 0.0991 × 1440 = <strong>142.7 kg</strong></li>
+<li>50-kg bags = <strong>3 bags</strong></li>
+</ul>
+
+<h3>Sand</h3>
+<ul>
+<li>Volume = <strong>5.25 cu.ft</strong></li>
+<li>Volume in m³ = 0.1487 m³</li>
+</ul>
+
+<h3>Aggregate</h3>
+<ul>
+<li>Volume = <strong>10.5 cu.ft</strong></li>
+<li>Volume in m³ = 0.2973 m³</li>
+</ul>
+
+<h3>6. Final Material Summary (M20 Mix) with 4 percent wastage</h3>
+<ul>
+<li><strong>Wet Concrete:</strong> 12.5 cu.ft (0.354 m³)</li>
+<li><strong>Dry Concrete:</strong> 19.25 cu.ft (0.545 m³)</li>
+<li><strong>Cement:</strong> 3 bags (143 kg)</li>
+<li><strong>Sand:</strong> 5.46 cu.ft (0.1546 m³)</li>
+<li><strong>Aggregate:</strong> 10.92 cu.ft (0.309 m³)</li>
+</ul>
+
+<h3>7. Other Concrete Mix Ratios (Quick Reference)</h3>
+
+<h3>M7.5 (1:4:8)</h3>
+<ul>
+<li>Total parts = 13</li>
+<li>Cement = 7.69%</li>
+<li>Sand = 30.77%</li>
+<li>Aggregate = 61.54%</li>
+</ul>
+
+<h3>M10 (1:3:6)</h3>
+<ul>
+<li>Total parts = 10</li>
+<li>Cement = 10%</li>
+<li>Sand = 30%</li>
+<li>Aggregate = 60%</li>
+</ul>
+
+<h3>M15 (1:2:4)</h3>
+<ul>
+<li>Total parts = 7</li>
+<li>Cement = 14.28%</li>
+<li>Sand = 28.57%</li>
+<li>Aggregate = 57.14%</li>
+</ul>
+
+<h3>M20 (1:1.5:3)</h3>
+<ul>
+<li>Total parts = 5.5</li>
+<li>Cement = 18.18%</li>
+<li>Sand = 27.27%</li>
+<li>Aggregate = 54.54%</li>
+</ul>
+
+<h3>M25 (1:1:2)</h3>
+<ul>
+<li>Total parts = 4</li>
+<li>Cement = 25%</li>
+<li>Sand = 25%</li>
+<li>Aggregate = 50%</li>
+</ul>
+
+
+            </ul>
+            <p><em>Note: Footing size depends on soil bearing capacity and column load.</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-con-lintel" style="margin-top:20px; background-color: #f0f9ff; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Lintel Concrete Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <ul style="margin-left: 20px;">
+              <h3>Concrete Calculation for Lintel (3.5 ft × 4.5 in × 6 in) – With Density & Mix Ratios</h3>
+
+
+<h3>1. Convert All Dimensions Into Feet</h3>
+<ul>
+<li>Length = 3.5 ft</li>
+<li>Width = 4.5 in ÷ 12 = <strong>0.375 ft</strong></li>
+<li>Depth = 6 in ÷ 12 = <strong>0.5 ft</strong></li>
+</ul>
+
+<h3>2. Wet Concrete Volume</h3>
+<p>Wet Volume = Length × Width × Depth</p>
+<p>= 3.5 ft × 0.375 ft × 0.5 ft<br>
+= <strong>0.65625 cu.ft</strong> (0.01859 m³)</p>
+
+<h3>3. Dry Concrete Volume</h3>
+<p>Standard dry factor = <strong>1.54</strong></p>
+<p>Dry Volume = 0.65625 × 1.54 = <strong>1.01 cu.ft</strong> (0.0286 m³)</p>
+
+<h3>4. Material Densities Used</h3>
+<ul>
+<li><strong>Cement:</strong> 1440 kg/m³</li>
+<li><strong>Sand:</strong> 1600 kg/m³</li>
+<li><strong>Aggregate:</strong> 1500 kg/m³</li>
+</ul>
+
+<h3>5. Mix Ratio Used for Detailed Calculation (M20 – 1:1.5:3)</h3>
+<p>Total parts = 5.5</p>
+
+<h3>Cement</h3>
+<ul>
+<li>Volume = (1 / 5.5) × 1.01 = <strong>0.1836 cu.ft</strong></li>
+<li>Volume in m³ = 0.0052 m³</li>
+<li>Weight = 0.0052 × 1440 = <strong>7.49 kg</strong></li>
+<li>50-kg bags = <strong>0.15 bag</strong></li>
+</ul>
+
+<h3>Sand</h3>
+<ul>
+<li>Volume = <strong>0.2754 cu.ft</strong></li>
+<li>Volume in m³ = 0.0078 m³</li>
+</ul>
+
+<h3>Aggregate</h3>
+<ul>
+<li>Volume = <strong>0.5508 cu.ft</strong></li>
+<li>Volume in m³ = 0.0156 m³</li>
+</ul>
+
+<h3>6. Final Material Summary (M20 Mix) with 4 percent wastage</h3>
+<ul>
+<li><strong>Wet Concrete:</strong> 0.656 cu.ft (0.0186 m³)</li>
+<li><strong>Dry Concrete:</strong> 1.01 cu.ft (0.0286 m³)</li>
+<li><strong>Cement:</strong> 7.5 kg (0.15 bag)</li>
+<li><strong>Sand:</strong> 0.287 cu.ft (0.0081 m³)</li>
+<li><strong>Aggregate:</strong> 0.573 cu.ft (0.0162 m³)</li>
+</ul>
+
+<h3>7. Other Concrete Mix Ratios (Quick Reference)</h3>
+
+<h3>M7.5 (1:4:8)</h3>
+<ul>
+<li>Total parts = 13</li>
+<li>Cement = 7.69%</li>
+<li>Sand = 30.77%</li>
+<li>Aggregate = 61.54%</li>
+</ul>
+
+<h3>M10 (1:3:6)</h3>
+<ul>
+<li>Total parts = 10</li>
+<li>Cement = 10%</li>
+<li>Sand = 30%</li>
+<li>Aggregate = 60%</li>
+</ul>
+
+<h3>M15 (1:2:4)</h3>
+<ul>
+<li>Total parts = 7</li>
+<li>Cement = 14.28%</li>
+<li>Sand = 28.57%</li>
+<li>Aggregate = 57.14%</li>
+</ul>
+
+<h3>M20 (1:1.5:3)</h3>
+<ul>
+<li>Total parts = 5.5</li>
+<li>Cement = 18.18%</li>
+<li>Sand = 27.27%</li>
+<li>Aggregate = 54.54%</li>
+</ul>
+
+<h3>M25 (1:1:2)</h3>
+<ul>
+<li>Total parts = 4</li>
+<li>Cement = 25%</li>
+<li>Sand = 25%</li>
+<li>Aggregate = 50%</li>
+</ul>
+
+
+            </ul>
+            <p><em>Note: Lintel length = Door/window width + 300mm bearing on each side.</em></p>
+          </div>
+        </div>
+</section>
 
       <!-- Steel -->
       <section id="steel" class="card section hidden">
@@ -1188,13 +1743,114 @@ input[type="number"] {
           </div>
         </div>
         
+        <div class="controls">
+          <div class="field">
+            <label>Wastage (%)</label>
+            <select id="s_wastage">
+              <option value="5" selected>5% (Standard)</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+          <div class="field hidden" id="s_wastage_custom_row">
+            <label>Custom Wastage (%)</label>
+            <input id="s_wastage_custom" type="number" step="0.1" value="5" min="0" max="100" />
+          </div>
+        </div>
+
         <div style="display:flex;gap:12px;align-items:center;margin-top:16px">
           <button class="btn" id="calcSteel">Calculate</button>
-          <div class="wastage-badge">Wastage: 3%</div>
+          <div class="wastage-badge" id="steelWastageBadge">Wastage: 5%</div>
         </div>
         
         <div id="steelResults" class="card" style="margin-top:20px"></div>
-      </section>
+      
+
+        <div class="card example-section" id="example-steel-beam" style="margin-top:20px; background-color: #fff4e6; border-left: 4px solid var(--accent);">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Beam Steel Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <p><strong>Problem:</strong> Calculate steel for beam: Length=5m, Width=300mm, Depth=500mm, Top=2×16mm, Bottom=3×20mm, Stirrups=8mm@150mm.</p>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Top bars: 2 bars × 5m × 1.58 kg/m (16mm) = 15.8 kg</li>
+              <li>Bottom bars: 3 bars × 5m × 2.47 kg/m (20mm) = 37.05 kg</li>
+              <li>Stirrup length = 2×((300-50-8) + (500-50-8)) + 2×75mm(hooks)-80(bend deduction)= 1438mm = 1.438m</li>
+              <li>No. of stirrups = (5000/150) + 1 = 35 nos</li>
+              <li>Stirrup weight = 35 × 1.438m × 0.395 kg/m (8mm) = 19.88 kg</li>
+              <li>Total = 15.8 + 37.05 + 19.88 = 72.73 kg</li>
+              <li>With 5% wastage = 76.35 × 1.05 ≈ 76.36 kg</li>
+            </ul>
+            <p><em>Note: Use standard unit weight - 8mm: 0.395 kg/m, 16mm: 1.58 kg/m, 20mm: 2.47 kg/m</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-steel-column" style="margin-top:20px; background-color: #fff4e6; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Column Steel Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <p><strong>Problem:</strong> Calculate steel for column: Height=3m, 400×400mm, 8 bars of 16mm, ties 8mm@200mm spacing.</p>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Main bars: 8 bars × 3m × 1.58 kg/m (16mm) = 37.92 kg</li>
+              <li>Tie length = 2×((400-80-8) + (400-80-8)) + 2×75mm(hooks)-80(bend deduction)= 1318mm = 1.318m</li>
+              <li>No. of ties = (3000/200) + 1 = 16 nos</li>
+              <li>Tie weight = 15 × 1.318m × 0.395 kg/m (8mm) = 8.329 kg</li>
+              <li>Total = 37.92 + 8.329 = 46.249 kg</li>
+              <li>With 5% wastage = 46.249 × 1.05 ≈ 48.56 kg</li>
+            </ul>
+            <p><em>Note: Minimum 4 bars for rectangular, 6 for large columns, 8 for heavy loads.</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-steel-slab" style="margin-top:20px; background-color: #fff4e6; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Slab Steel Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <p><strong>Problem:</strong> Calculate steel for slab: 4m×3m×150mm thick, main bars 10mm@150mm, distribution 8mm@200mm.</p>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Main bars (along 4m): No. = (3000/150) + 1 = 21 bars</li>
+              <li>Main bars weight = 21 × 4m × 0.617 kg/m (10mm) = 51.8 kg</li>
+              <li>Distribution bars (along 3m): No. = (4000/200) + 1 = 21 bars</li>
+              <li>Distribution weight = 21 × 3m × 0.395 kg/m (8mm) = 24.9 kg</li>
+              <li>Total = 51.8 + 24.9 = 76.7 kg</li>
+              <li>With 5% wastage = 76.7 × 1.05 ≈ 80.5 kg</li>
+            </ul>
+            <p><em>Note: Provide both layers (top & bottom) for slabs > 200mm thick.</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-steel-lintel" style="margin-top:20px; background-color: #fff4e6; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Lintel Steel Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <p><strong>Problem:</strong> Calculate steel for lintel: Length=2m, 200×150mm, 4 bars of 12mm, stirrups 8mm@150mm.</p>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Main bars: 4 bars × 2m × 0.888 kg/m (12mm) = 7.1 kg</li>
+              <li>Stirrup length = 2×((200-40-8)+(150-20-8)) + 2×75mm hooks-80 = 578mm = 0.578m</li>
+              <li>No. of stirrups = (2000/150) + 1 = 14 nos</li>
+              <li>Stirrup weight = 14 × 0.85m × 0.395 kg/m (8mm) = 3.196
+              <li>Total weigth = 7.1 + 3.196 = 10.296 kg</li>  
+              <li>With 5% wastage = 10.296 × 1.05 ≈ 10.81 kg</li>
+            </ul>
+            <p><em>Note: Lintel bars should extend 150-200mm beyond opening on both sides.</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-steel-footing" style="margin-top:20px; background-color: #fff4e6; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Footing Steel Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <p><strong>Problem:</strong> Calculate steel for footing: 1.5m×1.5m×300mm, main bars 12mm@150mm both ways.</p>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Bars in X-direction: No. = (1500/150) + 1 = 11 bars</li>
+              <li>X-direction weight = 11 × 1.5m × 0.888 kg/m (12mm) = 14.7 kg</li>
+              <li>Bars in Y-direction: No. = (1500/150) + 1 = 11 bars</li>
+              <li>Y-direction weight = 11 × 1.5m × 0.888 kg/m (12mm) = 14.7 kg</li>
+              <li>Total = 14.7 + 14.7 = 29.4 kg</li>
+              <li>With 5% wastage = 29.4 × 1.05 ≈ 30.9 kg</li>
+            </ul>
+            <p><em>Note: Footing reinforcement placed at bottom with 75mm clear cover.</em></p>
+          </div>
+        </div>
+</section>
 
       <!-- Brickwork -->
       <section id="brickwork" class="card section hidden">
@@ -1295,13 +1951,90 @@ input[type="number"] {
             <label>Custom</label>
             <input id="b_ratio_custom" placeholder="1:4"/>
           </div>
+          <div class="field">
+            <label>Wastage (%)</label>
+            <select id="b_wastage">
+              <option value="6" selected>6% (Standard)</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+          <div class="field hidden" id="b_wastage_custom_row">
+            <label>Custom Wastage (%)</label>
+            <input id="b_wastage_custom" type="number" step="0.1" value="6" min="0" max="100" />
+          </div>
         </div>
         <div style="display:flex;gap:12px;align-items:center;margin-top:16px">
           <button class="btn" id="calcBrick">Calculate</button>
-          <div class="wastage-badge">Wastage: 5%</div>
+          <div class="wastage-badge" id="brickWastageBadge">Wastage: 6%</div>
         </div>
         <div id="brickResults" class="card" style="margin-top:20px"></div>
-      </section>
+      
+<ul>
+      
+
+        <div class="card example-section" id="example-brick-4.5" style="margin-top:20px; background-color: #fef3f2; border-left: 4px solid var(--accent);">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Example Calculations for Brickwork</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <ul style="margin-left: 20px;">
+             <h3>Brickwork Calculation for 100 sq.ft Wall (4.5" Thick) with Mortar Ratio ( 1:6 ) </h3>
+  
+  <li>Wall area = <strong>100 sq.ft</strong></li>
+  <li>Wall thickness = <strong>4.5 in</strong> = 0.375 ft</li>
+  <li>Wall volume = 100 × 0.375 = <strong>37.5 cu.ft</strong></li>
+  <li>Brick nominal size = <strong>9" × 4.5" × 3"</strong> (common modular brick)</li>
+  <li>Mortar joint thickness = <strong>10 mm (≈0.394")</strong></li>
+  <li>Mortar mix used = <strong>1 : 6</strong> (cement : sand)</li>
+</ul>
+
+<h3>Method (brief)</h3>
+<p>1. Compute single brick nominal volume.<br>
+2. Add mortar thickness to get <em>brick-with-mortar</em> volume (this gives the volume occupied by one brick + its surrounding mortar).<br>
+3. Number of bricks = Wall volume ÷ Brick-with-mortar volume.<br>
+4. Brick solid-volume = Number of bricks × Brick nominal-volume.<br>
+5. Mortar volume = Wall volume − Brick solid-volume. (This is the correct mortar quantity.)</p>
+
+<h3>Key calculations (numbers)</h3>
+<ul>
+  <li>Wall volume = <strong>37.5 cu.ft</strong></li>
+  <li>Brick nominal volume = 9"×4.5"×3" = <strong>0.0703125 cu.ft</strong></li>
+  <li>Brick-with-mortar dimensions = (9 + 0.394) × (4.5 + 0.394) × (3 + 0.394) inches</li>
+  <li>Brick-with-mortar volume = <strong>0.09028 cu.ft</strong></li>
+  <li>Exact number of bricks = 37.5 ÷ 0.09028 = <strong>~415.36</strong> → round up → <strong>416 bricks</strong></li>
+  <li>Total brick solid-volume = 416 × 0.0703125 = <strong>29.205 cu.ft</strong></li>
+  <li>Mortar (wet) volume = Wall − Brick solid-volume = 37.5 − 29.205 = <strong>8.295 cu.ft</strong></li>
+</ul>
+
+<h3>Mortar quantities (convert to dry volume & split by mix)</h3>
+<ul>
+  <li>Dry mortar volume factor ≈ <strong>1.33</strong></li>
+  <li>Dry mortar volume = 8.295 × 1.33 = <strong>11.03 cu.ft</strong></li>
+  <li>Mortar mix 1:6 → total parts = 7</li>
+  <li>Cement volume = (1/7) × 11.03 = <strong>1.576 cu.ft</strong></li>
+  <li>Sand volume = (6/7) × 11.03 = <strong>9.456 cu.ft</strong></li>
+</ul>
+
+<h3>Practical material summary</h3>
+<ul>
+  <li><strong>Bricks required:</strong> <strong>416 bricks</strong> (rounded up)</li>
+  <li><strong>Mortar (wet):</strong> 8.295 cu.ft</li>
+  <li><strong>Dry mortar volume:</strong> 11.03 cu.ft</li>
+  <li><strong>Cement:</strong> 1.576 cu.ft → 1.26 bags (50-kg bag) → <strong>round up: 2 bags</strong></li>
+  <li><strong>Sand:</strong> 9.456 cu.ft = 0.268 m³ = 428 kg (≈ 0.43 tonnes)</li>
+</ul>
+
+<h3>Notes & recommendations</h3>
+<ul>
+  <li>The brick count uses 10 mm mortar joints. If you use 8 mm or 12 mm joints the brick-with-mortar volume changes and counts will differ.</li>
+  <li>We rounded bricks up to the nearest whole brick and cement bags up — always order a small extra allowance (≈2–5%) for wastage/cuts.</li>
+</ul>
+
+            </ul>
+            <p><em>Note: 4.5" walls (half brick) used for partition walls and compound walls.</em></p>
+          </div>
+        </div>
+
+ 
+</section>
 
       <!-- Plastering -->
       <section id="plaster" class="card section hidden">
@@ -1354,13 +2087,179 @@ input[type="number"] {
             <label>Custom</label>
             <input id="p_ratio_custom" placeholder="1:4"/>
           </div>
+          <div class="field">
+            <label>Wastage (%)</label>
+            <select id="p_wastage">
+              <option value="6" selected>6% (Standard)</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+          <div class="field hidden" id="p_wastage_custom_row">
+            <label>Custom Wastage (%)</label>
+            <input id="p_wastage_custom" type="number" step="0.1" value="6" min="0" max="100" />
+          </div>
         </div>
         <div style="display:flex;gap:12px;align-items:center;margin-top:16px">
           <button class="btn" id="calcPlaster">Calculate</button>
-          <div class="wastage-badge">Wastage: 3%</div>
+          <div class="wastage-badge" id="plasterWastageBadge">Wastage: 6%</div>
         </div>
         <div id="plasterResults" class="card" style="margin-top:20px"></div>
-      </section>
+ 
+        <div class="card example-section" id="example-plaster-internal" style="margin-top:20px; background-color: #f0fdf4; border-left: 4px solid var(--accent);">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Internal Wall Plaster Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <ul style="margin-left: 20px;">
+     <h3>Calculation of 12 mm thick plaster for 100 sq.ft.</h3>
+
+
+<h3>1. Standard Plaster Thickness</h3>
+<p>Plaster thickness depends on wall leveling and finish requirements. Commonly used thicknesses include:</p>
+<ul>
+    <li><strong>12 mm</strong> (internal walls)</li>
+    <li><strong>15 mm</strong> (external walls)</li>
+    <li><strong>20 mm</strong> (uneven surfaces)</li>
+</ul>
+
+<p>For this example, we will use a standard <strong>12 mm (0.012 m)</strong> thickness.</p>
+
+<h3>2. Plaster Area</h3>
+<p>The basic formula for plaster volume:</p>
+
+<p><strong>Plaster Volume = Area × Thickness</strong></p>
+
+<p>Example: Plastering a wall of <strong>100 sq.ft</strong></p>
+<ul>
+    <li>Convert to sq.m: 100 ÷ 10.764 = 9.29 m²</li>
+    <li>Thickness = 0.012 m</li>
+</ul>
+
+<p><strong>Wet Volume = 9.29 × 0.012 = 0.111 m³</strong></p>
+
+<h3>3. Dry Mortar Volume</h3>
+<p>Dry mortar = Wet volume × 1.33 (wastage + bulking)</p>
+
+<p><strong>Dry Volume = 0.111 × 1.33 = 0.147 m³</strong></p>
+
+<h3>4. Mortar Mix Ratio</h3>
+<p>Common plaster mortar ratios:</p>
+<ul>
+    <li><strong>1:4</strong> (Cement : Sand)</li>
+    <li>1:5</li>
+    <li>1:6</li>
+</ul>
+
+<p>In this example, we use <strong>1:4 ratio</strong>.</p>
+
+<h3>5. Cement and Sand Calculation</h3>
+
+<h3>Total Ratio</h3>
+<p>1 + 4 = 5</p>
+
+<h3>Cement Quantity</h3>
+<p>Cement = (1/5) × 0.147 = <strong>0.0294 m³</strong></p>
+
+<p>Density of cement = 1440 kg/m³</p>
+<p>Weight = 0.0294 × 1440 = <strong>42.3 kg</strong></p>
+<p>50 kg bags = 42.3 ÷ 50 = <strong>0.85 bags</strong></p>
+
+<h3>Sand Quantity</h3>
+<p>Sand = (4/5) × 0.147 = <strong>0.1176 m³ (4.15 cubic ft.)</strong></p>
+
+<p>Sand density = 1600 kg/m³</p>
+
+<h3>6. Final Summary for 100 sq.ft Plaster (12 mm, 1:4 Mix)</h3>
+<ul>
+    <li><strong>Area:</strong> 100 sq.ft (9.29 m²)</li>
+    <li><strong>Plaster Thickness:</strong> 12 mm</li>
+    <li><strong>Dry Mortar Volume:</strong> 0.147 m³</li>
+    <li><strong>Cement Required:</strong> 0.85 bags (≈ 42 kg)</li>
+    <li><strong>Sand Required:</strong> 0.1176 m³ (4.15 cubic ft.)</li>
+    <li><strong>Mix Ratio:</strong> 1:4</li>
+</ul>
+
+<h3>7. Quick Reference Table for Plaster (12 mm Thickness)</h3>
+<p><em>Based on 1:4 mortar mix</em></p>
+
+<table border="1" cellpadding="8" cellspacing="0">
+<tr>
+    <th>Area</th>
+    <th>Cement (bags)</th>
+    <th>Sand (m³)</th>
+</tr>
+<tr>
+    <td>100 sq.ft</td>
+    <td>0.85 bags</td>
+    <td>0.118 m³</td>
+</tr>
+<tr>
+    <td>200 sq.ft</td>
+    <td>1.70 bags</td>
+    <td>0.236 m³</td>
+</tr>
+<tr>
+    <td>500 sq.ft</td>
+    <td>4.25 bags</td>
+    <td>0.589 m³</td>
+</tr>
+<tr>
+    <td>1000 sq.ft</td>
+    <td>8.50 bags</td>
+    <td>1.178 m³</td>
+</tr>
+</table>
+
+<h3>8. Factors Affecting Plaster Quantity</h3>
+<ul>
+    <li>Wall unevenness</li>
+    <li>Mortar shrinkage</li>
+    <li>Wastage</li>
+    <li>Plaster thickness variation</li>
+    <li>Type of sand used</li>
+</ul>
+
+<h3>9. Conclusion</h3>
+<p>Plaster calculation becomes simple when area, thickness, mix ratio, and material densities are properly accounted for. This method can be used for internal walls, external walls, ceilings, and all types of plastering work. Using standard formulas ensures accurate and reliable estimations for any construction project.</p>
+      
+
+            </ul>
+            <p><em>Note: Internal plastering uses 1:4 or 1:5 ratio with 12mm thickness.</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-plaster-external" style="margin-top:20px; background-color: #f0fdf4; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 External Wall Plaster Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <p><strong>Problem:</strong> Calculate plaster for external wall: 5m×3m, thickness=15mm, ratio 1:5.</p>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Plaster area = 5m × 3m = 15 m²</li>
+              <li>Wet volume = 15 × 0.015 = 0.225 m³</li>
+              <li>Dry volume = 0.225 × 1.25 = 0.281 m³</li>
+              <li>For 1:5 (total 6 parts): Cement part = 0.281/6 = 0.047 m³</li>
+              <li>Cement = 0.047/0.035 = 1.34 bags ≈ 2 bags</li>
+              <li>Sand = (0.281/6) × 5 = 0.234 m³</li>
+            </ul>
+            <p><em>Note: External plastering uses 1:5 or 1:6 ratio with 15-20mm thickness.</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-plaster-ceiling" style="margin-top:20px; background-color: #f0fdf4; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Ceiling Plaster Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <p><strong>Problem:</strong> Calculate plaster for ceiling: 4m×3m, thickness=10mm, ratio 1:3.</p>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Ceiling area = 4m × 3m = 12 m²</li>
+              <li>Wet volume = 12 × 0.010 = 0.12 m³</li>
+              <li>Dry volume = 0.12 × 1.25 = 0.15 m³</li>
+              <li>For 1:3 (total 4 parts): Cement part = 0.15/4 = 0.0375 m³</li>
+              <li>Cement = 0.0375/0.035 = 1.07 bags ≈ 2 bags</li>
+              <li>Sand = (0.15/4) × 3 = 0.1125 m³</li>
+            </ul>
+            <p><em>Note: Ceiling plastering uses richer mix 1:3 or 1:4 with 10-12mm thickness.</em></p>
+          </div>
+        </div>
+</section>
 
       <!-- Tiling -->
       <section id="tiling" class="card section hidden">
@@ -1424,6 +2323,13 @@ input[type="number"] {
 
         <div class="controls">
           <div class="field">
+            <label>Bedding Material</label>
+            <select id="t_bedding_type">
+              <option value="adhesive">Adhesive</option>
+              <option value="mortar">Mortar</option>
+            </select>
+          </div>
+          <div class="field" id="t_mortar_th_row">
             <label>Mortar thickness</label>
             <div class="input-with-unit">
               <input id="t_mortar_th" class="conv-dim-mm" type="number" value="10"/>
@@ -1433,7 +2339,7 @@ input[type="number"] {
               </select>
             </div>
           </div>
-          <div class="field">
+          <div class="field" id="t_ratio_row">
             <label>Mortar ratio</label>
             <select id="t_ratio">
               <option>1:3</option>
@@ -1483,13 +2389,224 @@ input[type="number"] {
               </select>
             </div>
           </div>
+          <div class="field">
+            <label>Wastage (%)</label>
+            <select id="t_wastage">
+              <option value="10" selected>10% (Standard)</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+          <div class="field hidden" id="t_wastage_custom_row">
+            <label>Custom Wastage (%)</label>
+            <input id="t_wastage_custom" type="number" step="0.1" value="10" min="0" max="100" />
+          </div>
         </div>
         <div style="display:flex;gap:12px;align-items:center;margin-top:16px">
           <button class="btn" id="calcTiling">Calculate</button>
-          <div class="wastage-badge">Wastage: 5%</div>
+          <div class="wastage-badge" id="tilingWastageBadge">Wastage: 10%</div>
         </div>
         <div id="tilingResults" class="card" style="margin-top:20px"></div>
-      </section>
+
+</ul>
+      
+
+        <div class="card example-section" id="example-tiling-floor" style="margin-top:20px; background-color: #faf5ff; border-left: 4px solid var(--accent);">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Floor Tiling Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <ul style="margin-left: 20px;">
+     <h3>Floor Tile Calculation for a 10 ft × 10 ft Room – With Skirting, Door Deduction, Floor Mortar, Skirting Mortar & Adhesive</h3>
+
+
+<h3>1. Room Dimensions</h3>
+<ul>
+  <li>Length = <strong>10 ft</strong></li>
+  <li>Width = <strong>10 ft</strong></li>
+  <li>Total area = 100 sq.ft</li>
+</ul>
+
+<h3>2. Floor Tile Calculation</h3>
+
+<h3>Assumptions</h3>
+<ul>
+  <li>Tile size = <strong>2 ft × 2 ft</strong> = 4 sq.ft/tile</li>
+  <li>Wastage = <strong>12%</strong></li>
+</ul>
+
+<h3>Step 1: Tiles Needed (Without Wastage)</h3>
+<p>Tiles = 100 sq.ft ÷ 4 sq.ft = <strong>25 tiles</strong></p>
+
+<h3>Step 2: Add Wastage</h3>
+<p>12% of 25 = 3 tiles</p>
+
+<p><strong>Total floor tiles = 28 tiles</strong></p>
+
+<h3>3. Skirting Tile Calculation</h3>
+
+<h3>Assumptions</h3>
+<ul>
+  <li>Skirting height = <strong>4 inches = 0.33 ft</strong></li>
+  <li>Door width = <strong>3 ft</strong> (deducted)</li>
+  <li>Skirting uses cut strips from 2×2 ft tiles</li>
+</ul>
+
+<h3>Step 1: Perimeter</h3>
+<p>Perimeter = 2 × (10 + 10) = <strong>40 ft</strong></p>
+
+<h3>Step 2: Deduct Door</h3>
+<p>Skirting length = 40 − 3 = <strong>37 ft</strong></p>
+
+<h3>Step 3: Skirting Area</h3>
+<p>Area = 37 × 0.33 = <strong>12.21 sq.ft</strong></p>
+
+<h3>Step 4: Tiles Required</h3>
+<p>Tiles = 12.21 ÷ 4 = <strong>3.05 tiles</strong></p>
+
+<h3>Add Wastage</h3>
+<p>3.05 + 12% = <strong>4 tiles</strong></p>
+
+<h3>4. Total Tiles Required</h3>
+
+<table>
+<tr><th>Item</th><th>Tiles</th></tr>
+<tr><td>Floor tiles</td><td>28</td></tr>
+<tr><td>Skirting tiles</td><td>4</td></tr>
+<tr><td><strong>Total tiles</strong></td><td><strong>32 tiles</strong></td></tr>
+</table>
+
+<h3>5. Cement Mortar for Floor Tiles</h3>
+
+<h3>Assumptions</h3>
+<ul>
+  <li>Mortar thickness = <strong>1 inch = 0.083 ft</strong></li>
+  <li>Ratio = <strong>1:4 (cement : sand)</strong></li>
+  <li>Dry volume = <strong>+30%</strong></li>
+</ul>
+
+<h3>Step 1: Wet Volume</h3>
+<p>Wet volume = Area × Thickness = 100 × 0.083 = <strong>8.3 cu.ft</strong></p>
+
+<h3>Step 2: Dry Volume</h3>
+<p>Dry volume = 8.3 × 1.30 = <strong>10.79 cu.ft</strong></p>
+
+<h3>Step 3: Cement &amp; Sand</h3>
+<ul>
+  <li>Total ratio = 1 + 4 = 5</li>
+  <li>Cement = 10.79 × (1/5) = <strong>2.158 cu.ft</strong></li>
+  <li>Sand = 10.79 × (4/5) = <strong>8.63 cu.ft</strong></li>
+</ul>
+
+<h3>Cement Bags</h3>
+<p>1 bag = 1.25 cu.ft</p>
+<p>Cement bags = 2.158 ÷ 1.25 = <strong>1.73 bags</strong></p>
+
+<p><strong>Cement for floor = 1.73 bags</strong><br>
+<strong>Sand for floor = 8.63 cu.ft</strong></p>
+
+<h3>6. Cement Mortar for Skirting</h3>
+
+<h3>Assumptions</h3>
+<ul>
+  <li>Thickness = <strong>0.5 inch = 0.041 ft</strong></li>
+  <li>Area = <strong>12.21 sq.ft</strong></li>
+  <li>Ratio = <strong>1:4</strong></li>
+</ul>
+
+<h3>Step 1: Wet Volume</h3>
+<p>Volume = 12.21 × 0.041 = <strong>0.50 cu.ft</strong></p>
+
+<h3>Step 2: Dry Volume</h3>
+<p>Dry volume = 0.50 × 1.30 = <strong>0.65 cu.ft</strong></p>
+
+<h3>Step 3: Cement &amp; Sand</h3>
+<ul>
+  <li>Cement = 0.65 × (1/5) = <strong>0.13 cu.ft</strong></li>
+  <li>Sand = 0.65 × (4/5) = <strong>0.52 cu.ft</strong></li>
+</ul>
+
+<p>1 bag = 1.25 cu.ft → Cement = 0.13 ÷ 1.25 = <strong>0.10 bag (≈5 kg)</strong></p>
+
+<h3>Final (Skirting)</h3>
+<p><strong>Cement for skirting = 0.10 bag</strong><br>
+<strong>Sand for skirting = 0.52 cu.ft</strong></p>
+
+<h3>7. Tile Adhesive Calculation (Optional)</h3>
+
+<h3>Industry Standard Consumption</h3>
+<ul>
+  <li>4–5 kg per sq.m for 2×2 ft tiles</li>
+</ul>
+
+<h3>Convert Area</h3>
+<p>100 sq.ft = 9.29 sq.m</p>
+
+<h3>Adhesive Required</h3>
+<p>Adhesive = 9.29 × 5 = <strong>46.45 kg</strong></p>
+
+<p><strong>Total adhesive ≈ 50 kg (2 bags of 20–25 kg)</strong></p>
+
+<h3>8. Final Material Summary</h3>
+
+<table>
+<tr><th>Material</th><th>Quantity</th></tr>
+
+<tr><td>Total tiles (floor + skirting)</td><td><strong>32 tiles</strong></td></tr>
+
+<tr><td>Cement for floor mortar</td><td><strong>1.73 bags</strong></td></tr>
+<tr><td>Sand for floor mortar</td><td><strong>8.63 cu.ft</strong></td></tr>
+
+<tr><td>Cement for skirting mortar</td><td><strong>0.10 bag</strong></td></tr>
+<tr><td>Sand for skirting mortar</td><td><strong>0.52 cu.ft</strong></td></tr>
+
+<tr><td>Tile adhesive (Optional)</td><td><strong>50 kg</strong></td></tr>
+</table>
+
+<h3>9. Notes</h3>
+<ul>
+  <li>If using larger tiles (600×600, 800×800), change tile area only.</li>
+  <li>Mortar thickness varies by site—commonly 10–20 mm.</li>
+  <li>Diagonal layout needs 15–18% wastage.</li>
+  <li>Adhesive is recommended for vitrified tiles for better bonding.</li>
+            </ul>
+            <p><em>Note: Floor tiles typically 600×600mm or 800×800mm vitrified tiles.</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-tiling-wall" style="margin-top:20px; background-color: #faf5ff; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Wall Tiling Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <p><strong>Problem:</strong> Calculate tiles for bathroom wall: 3m×2.5m, tile 300×450mm, 10% wastage.</p>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Wall area = 3m × 2.5m = 7.5 m²</li>
+              <li>Tile area = 0.3m × 0.45m = 0.135 m²</li>
+              <li>Number of tiles = 7.5 ÷ 0.135 = 55.56 tiles</li>
+              <li>With 10% wastage = 55.56 × 1.10 ≈ 62 tiles</li>
+              <li>Tile boxes (if 6 tiles/box) = 62 ÷ 6 = 11 boxes</li>
+              <li>Adhesive (5mm bed) = 7.5 × 5 × 1.6 kg/m²/mm = 60 kg</li>
+              <li>Grout (2mm joint) = 7.5 × 1.2 kg/m² = 9 kg</li>
+            </ul>
+            <p><em>Note: Wall tiles usually 300×450mm or 300×600mm ceramic tiles.</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-tiling-floor-skirting" style="margin-top:20px; background-color: #faf5ff; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Floor with Skirting Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <p><strong>Problem:</strong> Floor 4m×3m + skirting (4" height), tile 600×600mm, door 900mm wide.</p>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Floor area = 4m × 3m = 12 m²</li>
+              <li>Floor tiles = (12 ÷ 0.36) × 1.10 ≈ 37 tiles</li>
+              <li>Skirting perimeter = 2×(4+3) - 0.9 = 13.1m</li>
+              <li>Skirting area = 13.1 × 0.1 = 1.31 m²</li>
+              <li>Skirting tiles = (1.31 ÷ 0.36) × 1.10 ≈ 4 tiles</li>
+              <li>Total tiles = 37 + 4 = 41 tiles</li>
+              <li>Adhesive = (12+1.31) × 4 × 1.6 = 85.6 kg</li>
+            </ul>
+            <p><em>Note: Skirting height typically 4" (100mm), deduct door opening width.</em></p>
+          </div>
+        </div>
+</section>
 
       <!-- Painting -->
       <section id="painting" class="card section hidden">
@@ -1524,20 +2641,252 @@ input[type="number"] {
             <label>Coverage (m²/L)</label>
             <input id="pa_cov" type="number" value="10"/>
           </div>
+          <div class="field">
+            <label>Wastage (%)</label>
+            <select id="pa_wastage">
+              <option value="6" selected>6% (Standard)</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+          <div class="field hidden" id="pa_wastage_custom_row">
+            <label>Custom Wastage (%)</label>
+            <input id="pa_wastage_custom" type="number" step="0.1" value="6" min="0" max="100" />
+          </div>
         </div>
         <div style="display:flex;gap:12px;align-items:center;margin-top:16px">
           <button class="btn" id="calcPaint" type="button">Calculate</button>
-          <div class="wastage-badge">Wastage: 2%</div>
+          <div class="wastage-badge" id="paintWastageBadge">Wastage: 6%</div>
         </div>
         </form>
         <div id="paintResults" class="card" style="margin-top:20px"></div>
-      </section>
+      
+
+        <div class="card example-section" id="example-painting-interior" style="margin-top:20px; background-color: #fefce8; border-left: 4px solid var(--accent);">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Interior Wall Painting Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <p><strong>Problem:</strong> Paint interior wall 5m×3m, 2 coats emulsion, coverage 12 m²/L.</p>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Wall area = 5m × 3m = 15 m²</li>
+              <li>Total area (2 coats) = 15 × 2 = 30 m²</li>
+              <li>Paint required = 30 ÷ 12 = 2.5 liters</li>
+              <li>With 5% wastage = 2.5 × 1.05 = 2.63 liters</li>
+              <li>Buy: 1×4L can (or 3×1L cans)</li>
+            </ul>
+            <p><em>Note: Interior emulsion coverage: 12-14 m²/L, apply 2 coats over primer.</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-painting-exterior" style="margin-top:20px; background-color: #fefce8; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Exterior Wall Painting Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <p><strong>Problem:</strong> Paint exterior wall 6m×3m, 2 coats weatherproof, coverage 10 m²/L.</p>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Wall area = 6m × 3m = 18 m²</li>
+              <li>Total area (2 coats) = 18 × 2 = 36 m²</li>
+              <li>Paint required = 36 ÷ 10 = 3.6 liters</li>
+              <li>With 5% wastage = 3.6 × 1.05 = 3.78 liters</li>
+              <li>Buy: 1×4L can</li>
+            </ul>
+            <p><em>Note: Exterior paint coverage: 10-11 m²/L, apply 2-3 coats over primer.</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-painting-ceiling" style="margin-top:20px; background-color: #fefce8; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Ceiling Painting Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <p><strong>Problem:</strong> Paint ceiling 4m×3m, 2 coats emulsion, coverage 11 m²/L.</p>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Ceiling area = 4m × 3m = 12 m²</li>
+              <li>Total area (2 coats) = 12 × 2 = 24 m²</li>
+              <li>Paint required = 24 ÷ 11 = 2.18 liters</li>
+              <li>With 5% wastage = 2.18 × 1.05 = 2.29 liters</li>
+              <li>Buy: 1×4L can (or 3×1L cans)</li>
+            </ul>
+            <p><em>Note: Ceiling coverage slightly lower due to absorption, use flat/matte finish.</em></p>
+          </div>
+        </div>
+
+        <div class="card example-section" id="example-painting-door-window" style="margin-top:20px; background-color: #fefce8; border-left: 4px solid var(--accent); display:none;">
+          <h3 style="color: var(--accent); margin-bottom: 12px;">📖 Door/Window Painting Example</h3>
+          <div style="font-size: 0.95rem; line-height: 1.6;">
+            <p><strong>Problem:</strong> Paint 3 doors (2.1m×0.9m each), 2 coats enamel, coverage 14 m²/L.</p>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Area per door = 2.1 × 0.9 × 2 (both sides) = 3.78 m²</li>
+              <li>Total door area = 3.78 × 3 = 11.34 m²</li>
+              <li>Total area (2 coats) = 11.34 × 2 = 22.68 m²</li>
+              <li>Paint required = 22.68 ÷ 14 = 1.62 liters</li>
+              <li>With 5% wastage = 1.62 × 1.05 = 1.70 liters</li>
+              <li>Buy: 2×1L cans</li>
+            </ul>
+            <p><em>Note: Enamel paint coverage: 13-15 m²/L for wood/metal surfaces.</em></p>
+          </div>
+        </div>
+</section>
 
       <!-- Blogs -->
       <section id="blogs" class="card section hidden">
         <h2>Blogs</h2>
-        <div class="card"><h3>Understanding Mix Ratios</h3><p>Short intro about mix ratios and where to use them.</p></div>
-        <div class="card"><h3>Plastering Tips</h3><p>How to get a smooth plaster finish with minimal waste.</p></div>
+        <div class="card"><h2>How to Calculate Cement, Sand, Aggregate and Water for a 1000 sq.ft Slab (4.5-inch Thick) (M20 Grade)</h2>
+        <h3><em>25 November 2025</em></h3>
+        <p>Accurate concrete calculation is essential for planning, budgeting, and ensuring smooth execution of any construction project. This guide explains the complete calculation for a <strong>1000 sq.ft slab</strong> with <strong>4.5-inch thickness</strong>, using industry-standard formulas and material densities. Additional mix ratios are also provided for quick reference.</p>
+
+<h3>1. Convert Slab Thickness</h3>
+<p>4.5 inches ÷ 12 = <strong>0.375 ft</strong></p>
+
+<h3>2. Wet Concrete Volume</h3>
+<p>Wet Volume = Area × Thickness<br>
+= 1000 sq.ft × 0.375 ft<br>
+= <strong>375 cu.ft</strong> (10.62 m³)</p>
+
+<h3>3. Dry Concrete Volume</h3>
+<p>Standard dry volume factor = <strong>1.54</strong></p>
+<p>Dry Volume = 375 × 1.54 = <strong>577.5 cu.ft</strong> (16.35 m³)</p>
+
+<h3>4. Material Densities Used</h3>
+<ul>
+<li><strong>Cement:</strong> 1440 kg/m³</li>
+<li><strong>Sand:</strong> 1600 kg/m³</li>
+<li><strong>Aggregate:</strong> 1500 kg/m³</li>
+</ul>
+
+<h3>5. Mix Ratio Used for Detailed Calculation (M20 – 1:1.5:3)</h3>
+<p>Total parts = 5.5</p>
+
+<h3>Cement</h3>
+<ul>
+<li>Volume = (1/5.5) × 577.5 = <strong>105 cu.ft</strong></li>
+<li>Volume in m³ = 2.97 m³</li>
+<li>Weight = 2.97 × 1440 = <strong>4,282 kg</strong></li>
+<li>50-kg bags = <strong>86 bags</strong></li>
+</ul>
+
+<h3>Sand</h3>
+<ul>
+<li>Volume = <strong>157.5 cu.ft</strong></li>
+<li>Volume in m³ = 4.46 m³</li>
+<li>Weight = 4.46 × 1600 = <strong>7,136 kg</strong> (7.14 tons)</li>
+</ul>
+
+<h3>Aggregate</h3>
+<ul>
+<li>Volume = <strong>315 cu.ft</strong></li>
+<li>Volume in m³ = 8.92 m³</li>
+<li>Weight = 8.92 × 1500 = <strong>13,380 kg</strong> (13.38 tons)</li>
+</ul>
+
+<h3>6. Final Material Summary for M20 Mix</h3>
+<ul>
+<li><strong>Wet Concrete:</strong> 375 cu.ft (10.62 m³)</li>
+<li><strong>Dry Concrete:</strong> 577.5 cu.ft (16.35 m³)</li>
+<li><strong>Cement:</strong> 86 bags (50 kg each)</li>
+<li><strong>Sand:</strong> 157.5 cu.ft (4.46 m³ → 7.14 tons)</li>
+<li><strong>Aggregate:</strong> 315 cu.ft (8.92 m³ → 13.38 tons)</li>
+</ul>
+
+<h3>7.Other Mix Ratios for Quick Reference</h3>
+
+<h3>M7.5 (1:4:8)</h3>
+<ul>
+<li>Total parts = 13</li>
+<li>Cement = 1/13 = 7.69%</li>
+<li>Sand = 4/13 = 30.77%</li>
+<li>Aggregate = 8/13 = 61.54%</li>
+</ul>
+
+<h3>M10 (1:3:6)</h3>
+<ul>
+<li>Total parts = 10</li>
+<li>Cement = 10%</li>
+<li>Sand = 30%</li>
+<li>Aggregate = 60%</li>
+</ul>
+
+<h3>M15 (1:2:4)</h3>
+<ul>
+<li>Total parts = 7</li>
+<li>Cement = 14.28%</li>
+<li>Sand = 28.57%</li>
+<li>Aggregate = 57.14%</li>
+</ul>
+
+<h3>M20 (1:1.5:3)</h3>
+<ul>
+<li>Total parts = 5.5</li>
+<li>Cement = 18.18%</li>
+<li>Sand = 27.27%</li>
+<li>Aggregate = 54.54%</li>
+</ul>
+
+<h3>M25 (1:1:2)</h3>
+<ul>
+<li>Total parts = 4</li>
+<li>Cement = 25%</li>
+<li>Sand = 25%</li>
+<li>Aggregate = 50%</li>
+</ul>
+
+<h3>8. Conclusion</h3>
+<p>This guide provides a complete and accurate concrete calculation for a 1000 sq.ft slab with 4.5-inch thickness. Using standard densities and mix ratios ensures reliable results that help in proper planning, cost control, and efficient material management. This method is widely used by engineers, contractors, and quantity surveyors for concrete estimation.</p>
+<h2><p style="color: #b22222;"><em>Explore More Construction Calculators at <a href="https://diycalculator.calandtimesolutions.com"target="_blank">DiyCivil-Calc</a></em></p></h2></div>
+<div class="card"><h2>Brickwork Calculation for 100 sq.ft Wall (4.5" Thick) — Corrected (Mortar Deducted)</h2>
+  <h3><em>20 November 2025</em></h3>
+
+<p>How to estimate bricks and mortar when mortar volume is deducted from the total wall volume (correct method). Parameters used:</p>
+<ul>
+  <li>Wall area = <strong>100 sq.ft</strong></li>
+  <li>Wall thickness = <strong>4.5 in</strong> = 0.375 ft</li>
+  <li>Wall volume = 100 × 0.375 = <strong>37.5 cu.ft</strong></li>
+  <li>Brick nominal size = <strong>9" × 4.5" × 3"</strong> (common modular brick)</li>
+  <li>Mortar joint thickness = <strong>10 mm (≈0.394")</strong></li>
+  <li>Mortar mix used = <strong>1 : 6</strong> (cement : sand)</li>
+</ul>
+
+<h3>Method (brief)</h3>
+<p>1. Compute single brick nominal volume.<br>
+2. Add mortar thickness to get <em>brick-with-mortar</em> volume (this gives the volume occupied by one brick + its surrounding mortar).<br>
+3. Number of bricks = Wall volume ÷ Brick-with-mortar volume.<br>
+4. Brick solid-volume = Number of bricks × Brick nominal-volume.<br>
+5. Mortar volume = Wall volume − Brick solid-volume. (This is the correct mortar quantity.)</p>
+
+<h3>Key calculations (numbers)</h3>
+<ul>
+  <li>Wall volume = <strong>37.5 cu.ft</strong></li>
+  <li>Brick nominal volume = 9"×4.5"×3" = <strong>0.0703125 cu.ft</strong></li>
+  <li>Brick-with-mortar dimensions = (9 + 0.394) × (4.5 + 0.394) × (3 + 0.394) inches</li>
+  <li>Brick-with-mortar volume = <strong>0.09028 cu.ft</strong></li>
+  <li>Exact number of bricks = 37.5 ÷ 0.09028 = <strong>~415.36</strong> → round up → <strong>416 bricks</strong></li>
+  <li>Total brick solid-volume = 416 × 0.0703125 = <strong>29.205 cu.ft</strong></li>
+  <li>Mortar (wet) volume = Wall − Brick solid-volume = 37.5 − 29.205 = <strong>8.295 cu.ft</strong></li>
+</ul>
+
+<h3>Mortar quantities (convert to dry volume & split by mix)</h3>
+<ul>
+  <li>Dry mortar volume factor ≈ <strong>1.33</strong></li>
+  <li>Dry mortar volume = 8.295 × 1.33 = <strong>11.03 cu.ft</strong></li>
+  <li>Mortar mix 1:6 → total parts = 7</li>
+  <li>Cement volume = (1/7) × 11.03 = <strong>1.576 cu.ft</strong></li>
+  <li>Sand volume = (6/7) × 11.03 = <strong>9.456 cu.ft</strong></li>
+</ul>
+
+<h3>Practical material summary</h3>
+<ul>
+  <li><strong>Bricks required:</strong> <strong>416 bricks</strong> (rounded up)</li>
+  <li><strong>Mortar (wet):</strong> 8.295 cu.ft</li>
+  <li><strong>Dry mortar volume:</strong> 11.03 cu.ft</li>
+  <li><strong>Cement:</strong> 1.576 cu.ft → 1.26 bags (50-kg bag) → <strong>round up: 2 bags</strong></li>
+  <li><strong>Sand:</strong> 9.456 cu.ft = 0.268 m³ = 428 kg (≈ 0.43 tonnes)</li>
+</ul>
+
+<h3>Notes & recommendations</h3>
+<ul>
+  <li>The brick count uses 10 mm mortar joints. If you use 8 mm or 12 mm joints the brick-with-mortar volume changes and counts will differ.</li>
+  <li>We rounded bricks up to the nearest whole brick and cement bags up — always order a small extra allowance (≈2–5%) for wastage/cuts.</li>
+  <li>4.5 inch wall is not a load bearing wall, it is used as a partition wall. 9 inch and above wall are loading bearing walls.</li>
+  <h2><p style="color: #b22222;"><em>Explore More Construction Calculators at <a href="https://diycalculator.calandtimesolutions.com"target="_blank">DiyCivil-Calc</a></em></p></h2>
       </section>
 
       <!-- Privacy + Contact -->
@@ -1549,9 +2898,10 @@ input[type="number"] {
         <form id="contactForm" class="contact-form" onsubmit="event.preventDefault();handleContact();">
           <input id="cf_name" type="text" placeholder="Your name" required style="width:100%"/>
           <input id="cf_email" type="email" placeholder="Email" required style="width:100%"/>
-          <textarea id="cf_msg" pl aceholder="Message" rows="5" style="width:100%"></textarea>
+          <textarea id="cf_msg" placeholder="Message" rows="5" style="width:100%"></textarea>
           <div style="display:flex;gap:8px;margin-top:8px"><button class="btn" type="submit">Send Message</button><div id="cf_status" class="small" style="align-self:center"></div></div>
         </form>
+        </div>
       </section>
     </main>
 
@@ -1708,6 +3058,22 @@ document.querySelectorAll('.tabs').forEach(tabGroup=>{ tabGroup.querySelectorAll
     else panelId = sectionId + '-' + variant;
     const panel = parent.querySelector('[id="' + panelId + '"]');
     if(panel) panel.classList.remove('hidden');
+
+    // Show/hide examples based on active variant
+    const calcType = sectionId.replace('Panels', '').replace('Tabs', '');
+    let examplePrefix = '';
+    if (calcType === 'concrete' || sectionId === 'concretePanels') examplePrefix = 'example-con-';
+    else if (calcType === 'steel' || sectionId === 'steelPanels') examplePrefix = 'example-steel-';
+    else if (sectionId === 'brickTabs') examplePrefix = 'example-brick-';
+    else if (sectionId === 'plasterTabs') examplePrefix = 'example-plaster-';
+    else if (sectionId === 'tilingTabs') examplePrefix = 'example-tiling-';
+    else if (sectionId === 'paintTabs') examplePrefix = 'example-painting-';
+
+    if (examplePrefix) {
+      document.querySelectorAll('[id^="' + examplePrefix + '"]').forEach(ex => ex.style.display = 'none');
+      const activeExample = document.getElementById(examplePrefix + variant);
+      if (activeExample) activeExample.style.display = 'block';
+    }
   }) );
 });
 
@@ -1759,23 +3125,112 @@ function plasterFrom(Lm,Hm,thM,ratioParts,wast){
   return {wet,dry,cementBags:cementBags*(1+(wast||0)/100), sandM3: sandVol*(1+(wast||0)/100)};
 }
 
-function tilingFrom(Lm,Wm,tileArea,adhThM,ratioParts,wast, includeSkirting, skirH, hasDoorOpening, doorW){
+function tilingFrom(Lm,Wm,tileArea,adhThM,ratioParts,wast, includeSkirting, skirH, hasDoorOpening, doorW, beddingType){
   const area = Lm*Wm;
   const tilesRaw = area / tileArea; const tiles = Math.ceil(tilesRaw * (1 + (wast||0)/100));
-  const wetVol = area * adhThM; const dryVol = wetVol * DRY_FACTORS.tiling;
-  const total = ratioParts.reduce((a,b)=>a+b,0);
-  const cementVol = (ratioParts[0]/total)*dryVol; const sandVol = (ratioParts[1]/total)*dryVol;
-  const cementKg = cementVol * DENS.cement; const cementBags = cementKg/50;
+  
+  let wetVol = 0, dryVol = 0, cementBags = 0, sandM3 = 0, adhesiveKg = 0;
+  
+  if(beddingType === 'mortar') {
+    wetVol = area * adhThM; 
+    dryVol = wetVol * DRY_FACTORS.tiling;
+    const total = ratioParts.reduce((a,b)=>a+b,0);
+    const cementVol = (ratioParts[0]/total)*dryVol; 
+    const sandVol = (ratioParts[1]/total)*dryVol;
+    const cementKg = cementVol * DENS.cement; 
+    cementBags = (cementKg/50)*(1+(wast||0)/100);
+    sandM3 = sandVol*(1+(wast||0)/100);
+  } else {
+    // Adhesive calculation (5-7 kg/m²)
+    adhesiveKg = area * 6 * (1+(wast||0)/100);
+  }
+  
   let skirting = null;
   if(includeSkirting){
     let perimeter = 2*(Lm+Wm);
     if(hasDoorOpening && doorW > 0) perimeter -= doorW;
     const skArea = perimeter * skirH;
-    const skTilesRaw = skArea / tileArea; const skTiles = Math.ceil(skTilesRaw * (1 + (wast||0)/100));
+    const skTilesRaw = skArea / tileArea; 
+    const skTiles = Math.ceil(skTilesRaw * (1 + (wast||0)/100));
     skirting = {skArea, skTiles};
   }
-  return {area,tiles,dryVol,cementBags:cementBags*(1+(wast||0)/100),cementBagsRaw:cementKg/50,sandM3:sandVol*(1+(wast||0)/100),skirting};
+  
+  return {area,tiles,dryVol,cementBags,cementBagsRaw:cementBags,sandM3,adhesiveKg,skirting};
 }
+
+// Get unit for calculation (metric or imperial based on input units)
+function getCalculationUnit(input1Id, input2Id) {
+  const unit1 = inputUnits[input1Id] || 'm';
+  const unit2 = inputUnits[input2Id] || 'mm';
+  return (unit1 === 'ft' || unit2 === 'in') ? 'imperial' : 'metric';
+}
+
+// Wastage handlers for all calculators
+// Concrete wastage
+document.getElementById('c_wastage').addEventListener('change', (e)=>{
+  const isCustom = e.target.value === 'custom';
+  document.getElementById('c_wastage_custom_row').classList.toggle('hidden', !isCustom);
+  const wastVal = isCustom ? (Number(document.getElementById('c_wastage_custom').value) || 4) : Number(e.target.value);
+  document.getElementById('concreteWastageBadge').textContent = 'Wastage: ' + wastVal + '%';
+});
+document.getElementById('c_wastage_custom')?.addEventListener('input', (e)=>{
+  document.getElementById('concreteWastageBadge').textContent = 'Wastage: ' + (Number(e.target.value) || 4) + '%';
+});
+
+// Steel wastage
+document.getElementById('s_wastage').addEventListener('change', (e)=>{
+  const isCustom = e.target.value === 'custom';
+  document.getElementById('s_wastage_custom_row').classList.toggle('hidden', !isCustom);
+  const wastVal = isCustom ? (Number(document.getElementById('s_wastage_custom').value) || 5) : Number(e.target.value);
+  document.getElementById('steelWastageBadge').textContent = 'Wastage: ' + wastVal + '%';
+});
+document.getElementById('s_wastage_custom')?.addEventListener('input', (e)=>{
+  document.getElementById('steelWastageBadge').textContent = 'Wastage: ' + (Number(e.target.value) || 5) + '%';
+});
+
+// Brick wastage
+document.getElementById('b_wastage').addEventListener('change', (e)=>{
+  const isCustom = e.target.value === 'custom';
+  document.getElementById('b_wastage_custom_row').classList.toggle('hidden', !isCustom);
+  const wastVal = isCustom ? (Number(document.getElementById('b_wastage_custom').value) || 6) : Number(e.target.value);
+  document.getElementById('brickWastageBadge').textContent = 'Wastage: ' + wastVal + '%';
+});
+document.getElementById('b_wastage_custom')?.addEventListener('input', (e)=>{
+  document.getElementById('brickWastageBadge').textContent = 'Wastage: ' + (Number(e.target.value) || 6) + '%';
+});
+
+// Plaster wastage
+document.getElementById('p_wastage').addEventListener('change', (e)=>{
+  const isCustom = e.target.value === 'custom';
+  document.getElementById('p_wastage_custom_row').classList.toggle('hidden', !isCustom);
+  const wastVal = isCustom ? (Number(document.getElementById('p_wastage_custom').value) || 6) : Number(e.target.value);
+  document.getElementById('plasterWastageBadge').textContent = 'Wastage: ' + wastVal + '%';
+});
+document.getElementById('p_wastage_custom')?.addEventListener('input', (e)=>{
+  document.getElementById('plasterWastageBadge').textContent = 'Wastage: ' + (Number(e.target.value) || 6) + '%';
+});
+
+// Tiling wastage
+document.getElementById('t_wastage').addEventListener('change', (e)=>{
+  const isCustom = e.target.value === 'custom';
+  document.getElementById('t_wastage_custom_row').classList.toggle('hidden', !isCustom);
+  const wastVal = isCustom ? (Number(document.getElementById('t_wastage_custom').value) || 10) : Number(e.target.value);
+  document.getElementById('tilingWastageBadge').textContent = 'Wastage: ' + wastVal + '%';
+});
+document.getElementById('t_wastage_custom')?.addEventListener('input', (e)=>{
+  document.getElementById('tilingWastageBadge').textContent = 'Wastage: ' + (Number(e.target.value) || 10) + '%';
+});
+
+// Paint wastage
+document.getElementById('pa_wastage').addEventListener('change', (e)=>{
+  const isCustom = e.target.value === 'custom';
+  document.getElementById('pa_wastage_custom_row').classList.toggle('hidden', !isCustom);
+  const wastVal = isCustom ? (Number(document.getElementById('pa_wastage_custom').value) || 6) : Number(e.target.value);
+  document.getElementById('paintWastageBadge').textContent = 'Wastage: ' + wastVal + '%';
+});
+document.getElementById('pa_wastage_custom')?.addEventListener('input', (e)=>{
+  document.getElementById('paintWastageBadge').textContent = 'Wastage: ' + (Number(e.target.value) || 6) + '%';
+});
 
 // Show concrete initially
 showSection('concrete');
@@ -1788,13 +3243,6 @@ document.getElementById('c_grade').addEventListener('change', (e)=>{
   else if(e.target.value==='M25') document.getElementById('c_wcr').value = 0.44;
   else if(e.target.value==='M30') document.getElementById('c_wcr').value = 0.42;
 });
-
-// Get unit for calculation (metric or imperial based on input units)
-function getCalculationUnit(input1Id, input2Id) {
-  const unit1 = inputUnits[input1Id] || 'm';
-  const unit2 = inputUnits[input2Id] || 'mm';
-  return (unit1 === 'ft' || unit2 === 'in') ? 'imperial' : 'metric';
-}
 
 // Concrete calculate
 document.getElementById('calcConcrete').addEventListener('click', ()=>{
@@ -1865,7 +3313,11 @@ document.getElementById('calcConcrete').addEventListener('click', ()=>{
     else if(grade==='M30') parts=[1,0.75,1.5];
     else { const txt = document.getElementById('c_custom').value; parts = parseRatio(txt) || [1,1.5,3]; }
     const wcr = Number(document.getElementById('c_wcr').value) || 0.45;
-    const mats = concreteFromDry(dryVol, parts, wcr, 2);
+    
+    const wastSel = document.getElementById('c_wastage').value;
+    const wastPercent = (wastSel === 'custom') ? (Number(document.getElementById('c_wastage_custom').value) || 4) : Number(wastSel);
+    
+    const mats = concreteFromDry(dryVol, parts, wcr, wastPercent);
     const out = document.getElementById('concreteResults'); out.innerHTML = '';
     const tbl = document.createElement('table'); tbl.className='results-table';
     tbl.innerHTML = '<tr><th>Material</th><th>Quantity</th><th>Unit</th></tr>';
@@ -1900,17 +3352,20 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
         let results = [];
         let calcUnit = 'metric';
 
+        const wastSel = document.getElementById('s_wastage').value;
+        const wastPercent = (wastSel === 'custom') ? (Number(document.getElementById('s_wastage_custom').value) || 5) : Number(wastSel);
+
         if(variant === 'beam'){
-            const lenId = 's_beam_len', wId = 's_beam_w', dId = 's_beam_d';
-            const L = Number(document.getElementById(lenId).value);
+            const lId = 's_beam_len', wId = 's_beam_w', dId = 's_beam_d';
+            const L = Number(document.getElementById(lId).value);
             const W = Number(document.getElementById(wId).value);
             const D = Number(document.getElementById(dId).value);
             if(!L||!W||!D) throw 'Enter length, width and depth';
-            calcUnit = getCalculationUnit(lenId, wId);
-            const lUnit = inputUnits[lenId];
+            calcUnit = getCalculationUnit(lId, wId);
+            const lUnit = inputUnits[lId];
+            const Lm = (lUnit === 'm') ? L : ftToM(L);
             const wUnit = inputUnits[wId];
             const dUnit = inputUnits[dId];
-            const Lm = (lUnit === 'm') ? L : ftToM(L);
             const Wmm = (wUnit === 'mm') ? W : inToMm(W);
             const Dmm = (dUnit === 'mm') ? D : inToMm(D);
 
@@ -1926,12 +3381,12 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
             const hookUnit = inputUnits['s_beam_hook'];
             const hookMm = (hookUnit === 'mm') ? hookVal : inToMm(hookVal);
 
-            const stCutMm = 2*((Wmm - 25 - stDia )+ (Dmm - 25 - stDia )) + 2*hookMm - 80;
+            const stCutMm = 2*((Wmm - 2*25 - stDia )+ (Dmm - 2*25 - stDia )) + 2*hookMm - 80;
             const topWeight = steelWeightPerMeter(topDia) * topCnt * Lm;
-            results.push({name: 'Top bars', weight: topWeight});
             const botWeight = steelWeightPerMeter(botDia) * botCnt * Lm;
+            results.push({name: 'Top bars', weight: topWeight});
             results.push({name: 'Bottom bars', weight: botWeight});
-            const stCount = Math.ceil((Lm*1000)/stSpaceMm);
+            const stCount = Math.ceil(((Lm*1000)/stSpaceMm)+1);
             const stirTotalM = (stCutMm * stCount)/1000;
             const stirWeight = steelWeightPerMeter(stDia) * stirTotalM;
             results.push({name: 'Stirrups', weight: stirWeight});
@@ -1947,9 +3402,9 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
             if(!H||!W||!L) throw 'Enter height, width and length';
             calcUnit = getCalculationUnit(hId, wId);
             const hUnit = inputUnits[hId];
+            const Hm = (hUnit === 'm') ? H : ftToM(H);
             const wUnit = inputUnits[wId];
             const lUnit = inputUnits[lId];
-            const Hm = (hUnit === 'm') ? H : ftToM(H);
             const Wmm = (wUnit === 'mm') ? W : inToMm(W);
             const Lmm = (lUnit === 'mm') ? L : inToMm(L);
 
@@ -1963,10 +3418,10 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
             const hookUnit = inputUnits['s_col_hook'];
             const hookMm = (hookUnit === 'mm') ? hookVal : inToMm(hookVal);
 
-            const tieCutMm = 2*((Wmm - 40 - tieDia )+ (Lmm - 40 - tieDia )) + 2*hookMm - 80;
+            const tieCutMm = 2*((Wmm - 2*40 - tieDia )+ (Lmm - 2*40 - tieDia )) + 2*hookMm - 80;
             const longWeight = steelWeightPerMeter(longDia) * longCnt * Hm;
             results.push({name: 'Longitudinal bars', weight: longWeight});
-            const tieCount = Math.ceil((Hm*1000)/tieSpaceMm);
+            const tieCount = Math.ceil(((Hm*1000)/tieSpaceMm)+1);
             const tieTotalM = (tieCutMm * tieCount)/1000;
             const tieWeight = steelWeightPerMeter(tieDia) * tieTotalM;
             results.push({name: 'Ties', weight: tieWeight});
@@ -1975,11 +3430,10 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
             totalWeight = longWeight + tieWeight;
 
         } else if(variant === 'slab'){
-            const lId = 's_slab_len', wId = 's_slab_w', tId = 's_slab_t';
+            const lId = 's_slab_len', wId = 's_slab_w';
             const L = Number(document.getElementById(lId).value);
             const W = Number(document.getElementById(wId).value);
-            const T = Number(document.getElementById(tId).value);
-            if(!L||!W||!T) throw 'Enter length, width and thickness';
+            if(!L||!W) throw 'Enter length and width';
             calcUnit = getCalculationUnit(lId, wId);
             const lUnit = inputUnits[lId];
             const wUnit = inputUnits[wId];
@@ -1995,12 +3449,12 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
             const distSpaceUnit = inputUnits['s_slab_dist_space'];
             const distSpaceMm = (distSpaceUnit === 'mm') ? distSpaceVal : inToMm(distSpaceVal);
 
-            const mainCount = Math.ceil((Wm*1000)/mainSpaceMm);
+            const mainCount = Math.ceil(((Wm*1000)/mainSpaceMm) + 1);
             const mainTotalLength = mainCount * Lm;
             const mainWeight = steelWeightPerMeter(mainDia) * mainTotalLength;
             results.push({name: 'Main bars', weight: mainWeight});
             results.push({name: 'No. of Main bars', weight: mainCount, isCount: true});
-            const distCount = Math.ceil((Lm*1000)/distSpaceMm);
+            const distCount = Math.ceil(((Lm*1000)/distSpaceMm) + 1);
             const distTotalLength = distCount * Wm;
             const distWeight = steelWeightPerMeter(distDia) * distTotalLength;
             results.push({name: 'Distribution bars', weight: distWeight});
@@ -2015,9 +3469,9 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
             if(!L||!W||!D) throw 'Enter length, width and depth';
             calcUnit = getCalculationUnit(lId, wId);
             const lUnit = inputUnits[lId];
+            const Lm = (lUnit === 'm') ? L : ftToM(L);
             const wUnit = inputUnits[wId];
             const dUnit = inputUnits[dId];
-            const Lm = (lUnit === 'm') ? L : ftToM(L);
             const Wmm = (wUnit === 'mm') ? W : inToMm(W);
             const Dmm = (dUnit === 'mm') ? D : inToMm(D);
 
@@ -2031,10 +3485,10 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
             const hookUnit = inputUnits['s_lintel_hook'];
             const hookMm = (hookUnit === 'mm') ? hookVal : inToMm(hookVal);
 
-            const stCutMm = 2*((Wmm - 25 - stDia )+ (Dmm - 25 - stDia )) + 2*hookMm - 80;
+            const stCutMm = 2*((Wmm - 2*20 - stDia )+ (Dmm - 2*20 - stDia )) + 2*hookMm - 80;
             const mainWeight = steelWeightPerMeter(mainDia) * mainCnt * Lm;
             results.push({name: 'Main bars', weight: mainWeight});
-            const stCount = Math.ceil((Lm*1000)/stSpaceMm);
+            const stCount = Math.ceil(((Lm*1000)/stSpaceMm)+1);
             const stirTotalM = (stCutMm * stCount)/1000;
             const stirWeight = steelWeightPerMeter(stDia) * stirTotalM;
             results.push({name: 'Stirrups', weight: stirWeight});
@@ -2063,12 +3517,12 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
             const distSpaceUnit = inputUnits['s_footing_dist_space'];
             const distSpaceMm = (distSpaceUnit === 'mm') ? distSpaceVal : inToMm(distSpaceVal);
 
-            const mainCount = Math.ceil((Wm*1000)/mainSpaceMm);
+            const mainCount = Math.ceil(((Wm*1000)/mainSpaceMm) + 1);
             const mainTotalLength = mainCount * Lm;
             const mainWeight = steelWeightPerMeter(mainDia) * mainTotalLength;
             results.push({name: 'Main bars', weight: mainWeight});
             results.push({name: 'No. of Main bars', weight: mainCount, isCount: true});
-            const distCount = Math.ceil((Lm*1000)/distSpaceMm);
+            const distCount = Math.ceil(((Lm*1000)/distSpaceMm) + 1);
             const distTotalLength = distCount * Wm;
             const distWeight = steelWeightPerMeter(distDia) * distTotalLength;
             results.push({name: 'Distribution bars', weight: distWeight});
@@ -2076,13 +3530,12 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
             totalWeight = mainWeight + distWeight;
         }
 
-        const totalWithWastage = totalWeight * 1.03;
+        const totalWithWastage = totalWeight * (1 + wastPercent/100);
         const out = document.getElementById('steelResults');
         out.innerHTML = '';
         const tbl = document.createElement('table');
         tbl.className = 'results-table';
         
-        // Updated table header for dual units
         tbl.innerHTML = `
             <tr>
                 <th>Component</th>
@@ -2112,7 +3565,6 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
                     </tr>
                 `;
             } else {
-                // Show weight in both kg and lbs for all steel components
                 tbl.innerHTML += `
                     <tr>
                         <td>${item.name}</td>
@@ -2124,22 +3576,22 @@ document.getElementById('calcSteel').addEventListener('click', ()=>{
             }
         });
 
-        // Total row with both units
         tbl.innerHTML += `
             <tr>
-                <td><strong>Total Steel (with 3% wastage)</strong></td>
+                <td><strong>Total Steel (with ${wastPercent}% wastage)</strong></td>
                 <td><strong>${round(totalWithWastage, 2)} kg</strong></td>
                 <td><strong>${round(kgToLb(totalWithWastage), 2)} lbs</strong></td>
                 <td>-</td>
             </tr>
         `;
-
+        
         out.appendChild(tbl);
         showToast('Steel calculation completed!', 'success');
     } catch(err) {
         showToast('Error: ' + err, 'error');
     }
 });
+
 // Brick handlers
 document.getElementById('b_size').addEventListener('change', (e)=>{
   const show = e.target.value==='custom';
@@ -2148,6 +3600,7 @@ document.getElementById('b_size').addEventListener('change', (e)=>{
   document.getElementById('b_custom_row3').classList.toggle('hidden', !show);
 });
 document.getElementById('b_ratio').addEventListener('change',(e)=> document.getElementById('b_ratio_custom_row').classList.toggle('hidden', e.target.value!=='custom'));
+
 document.getElementById('calcBrick').addEventListener('click', ()=>{
   try{
     const lId = 'b_len', hId = 'b_h', tId = 'b_t';
@@ -2170,7 +3623,11 @@ document.getElementById('calcBrick').addEventListener('click', ()=>{
     const mortarThUnit = inputUnits['b_mortar_th'];
     const mortarTh = (mortarThUnit==='mm')? (Number(document.getElementById('b_mortar_th').value)||10)/1000 : (inToMm(Number(document.getElementById('b_mortar_th').value)))/1000;
     const ratioSel = document.getElementById('b_ratio').value; const parts = (ratioSel==='custom')? parseRatio(document.getElementById('b_ratio_custom').value): parseRatio(ratioSel);
-    const res = brickworkFromDry(wallVol, {l:bl,w:bw,h:bh}, mortarTh, parts, 5);
+    
+    const wastSel = document.getElementById('b_wastage').value;
+    const wastPercent = (wastSel === 'custom') ? (Number(document.getElementById('b_wastage_custom').value) || 6) : Number(wastSel);
+    
+    const res = brickworkFromDry(wallVol, {l:bl,w:bw,h:bh}, mortarTh, parts, wastPercent);
     const out = document.getElementById('brickResults'); out.innerHTML='';
     const tbl=document.createElement('table'); tbl.className='results-table';
     tbl.innerHTML = '<tr><th>Material</th><th>Quantity</th><th>Unit</th></tr>';
@@ -2195,6 +3652,7 @@ document.getElementById('calcBrick').addEventListener('click', ()=>{
 
 // Plaster handlers
 document.getElementById('p_ratio').addEventListener('change',(e)=> document.getElementById('p_ratio_custom_row').classList.toggle('hidden', e.target.value!=='custom'));
+
 document.getElementById('calcPlaster').addEventListener('click', ()=>{
   try{
     const lId = 'p_len', hId = 'p_h', tId = 'p_t';
@@ -2206,7 +3664,11 @@ document.getElementById('calcPlaster').addEventListener('click', ()=>{
     const Hm = (hUnit === 'm') ? H : ftToM(H);
     const Tm = (tUnit === 'mm') ? (T/1000) : (inToMm(T)/1000);
     const parts = (document.getElementById('p_ratio').value==='custom')? parseRatio(document.getElementById('p_ratio_custom').value): parseRatio(document.getElementById('p_ratio').value);
-    const res = plasterFrom(Lm,Hm,Tm,parts,3);
+    
+    const wastSel = document.getElementById('p_wastage').value;
+    const wastPercent = (wastSel === 'custom') ? (Number(document.getElementById('p_wastage_custom').value) || 6) : Number(wastSel);
+    
+    const res = plasterFrom(Lm,Hm,Tm,parts,wastPercent);
     const out=document.getElementById('plasterResults'); out.innerHTML='';
     const tbl=document.createElement('table'); tbl.className='results-table';
     if(calcUnit==='metric'){
@@ -2235,64 +3697,100 @@ document.getElementById('t_tile_size').addEventListener('change', (e)=>{
   document.getElementById('t_tile_custom_row').classList.toggle('hidden', !show);
 });
 document.getElementById('t_ratio').addEventListener('change',(e)=> document.getElementById('t_ratio_custom_row').classList.toggle('hidden', e.target.value!=='custom'));
-document.getElementById('t_skirting').addEventListener('change',(e)=> document.getElementById('t_skirting_row').classList.toggle('hidden', e.target.value!=='yes'));
+document.getElementById('t_skirting').addEventListener('change',(e)=>{ 
+  const show = e.target.value==='yes';
+  document.getElementById('t_skirting_row').classList.toggle('hidden', !show);
+  document.getElementById('t_door_row').classList.toggle('hidden', !show);
+  if(!show){
+    document.getElementById('t_door_width_row').classList.add('hidden');
+  }
+});
+document.getElementById('t_door_opening').addEventListener('change',(e)=> document.getElementById('t_door_width_row').classList.toggle('hidden', e.target.value!=='yes'));
+
+document.getElementById('t_bedding_type').addEventListener('change', (e)=>{
+  const isMortar = e.target.value === 'mortar';
+  document.getElementById('t_mortar_th_row').classList.toggle('hidden', !isMortar);
+  document.getElementById('t_ratio_row').classList.toggle('hidden', !isMortar);
+  if(!isMortar) {
+    document.getElementById('t_ratio_custom_row').classList.add('hidden');
+  }
+});
 
 document.getElementById('calcTiling').addEventListener('click', ()=>{
   try{
     const lId = 't_len', wId = 't_w';
     const L = Number(document.getElementById(lId).value); const W = Number(document.getElementById(wId).value);
-    if(!L||!W) throw 'Enter length & width';
+    if(!L||!W) throw 'Enter length and width';
     const calcUnit = getCalculationUnit(lId, wId);
     const lUnit = inputUnits[lId], wUnit = inputUnits[wId];
     const Lm = (lUnit === 'm') ? L : ftToM(L);
     const Wm = (wUnit === 'm') ? W : ftToM(W);
-    const tileVal = document.getElementById('t_tile_size').value;
-    let tileArea = 0.09;
-    if(tileVal==='300x300') tileArea = 0.3*0.3;
-    else if(tileVal==='400x400') tileArea = 0.4*0.4;
-    else if(tileVal==='600x600') tileArea = 0.6*0.6;
-    else if(tileVal==='200x200') tileArea = 0.2*0.2;
-    else if(tileVal==='custom'){
-      let tl = Number(document.getElementById('t_tile_custom_l').value);
-      let tw = Number(document.getElementById('t_tile_custom_w').value);
-      if(!tl||!tw) throw 'Enter custom tile length and width';
-      const tlUnit = inputUnits['t_tile_custom_l'], twUnit = inputUnits['t_tile_custom_w'];
-      tl = (tlUnit === 'mm') ? (tl/1000) : (inToMm(tl)/1000);
-      tw = (twUnit === 'mm') ? (tw/1000) : (inToMm(tw)/1000);
-      tileArea = tl * tw;
-    }
-    const adhThUnit = inputUnits['t_mortar_th'];
-    const adhTh = (adhThUnit === 'mm') ? (Number(document.getElementById('t_mortar_th').value)||10)/1000 : (inToMm(Number(document.getElementById('t_mortar_th').value)))/1000;
-    const parts = (document.getElementById('t_ratio').value==='custom')? parseRatio(document.getElementById('t_ratio_custom').value): parseRatio(document.getElementById('t_ratio').value);
-    const includeSk = document.getElementById('t_skirting').value==='yes';
-    const skHUnit = inputUnits['t_skir_h'];
-    const skH = includeSk ? ((skHUnit === 'mm') ? (Number(document.getElementById('t_skir_h').value)||100)/1000 : (inToMm(Number(document.getElementById('t_skir_h').value)))/1000) : 0;
-    const includeDoor = document.getElementById('t_door_opening') ? document.getElementById('t_door_opening').value==='yes' : false;
-    const doorWUnit = inputUnits['t_door_w'];
-    const doorW = includeDoor ? ((doorWUnit === 'm') ? (Number(document.getElementById('t_door_w').value)||0.9) : ftToM(Number(document.getElementById('t_door_w').value)||3)) : 0;
-    const res = tilingFrom(Lm,Wm,tileArea,adhTh,parts,5, includeSk, skH, includeDoor, doorW);
-    const out = document.getElementById('tilingResults'); out.innerHTML='';
-    const tbl=document.createElement('table'); tbl.className='results-table';
-    if(calcUnit==='metric'){
-      tbl.innerHTML = '<tr><th>Material</th><th>Quantity</th><th>Unit</th></tr>';
-      tbl.innerHTML += `<tr><td>Area</td><td>${round(res.area,3)}</td><td>m²</td></tr>`;
-      tbl.innerHTML += `<tr><td>Tiles required</td><td>${res.tiles}</td><td>nos</td></tr>`;
-      tbl.innerHTML += `<tr><td>Bedding dry volume</td><td>${round(res.dryVol,3)}</td><td>m³</td></tr>`;
-      tbl.innerHTML += `<tr><td><strong>Cement</strong></td><td><strong>${round(res.cementBags,1)}</strong></td><td><strong>bags (50 kg each)</strong></td></tr>`;
-      tbl.innerHTML += `<tr><td>Sand</td><td>${round(res.sandM3,3)}</td><td>m³</td></tr>`;
-      const waterKg = 0.55 * (res.cementBags*50); const waterL = waterKg;
-      tbl.innerHTML += `<tr><td>Water</td><td>${round(waterL,2)}</td><td>L (${round(lToLb(waterL),2)} lb)</td></tr>`;
+    let tileLMm, tileWMm;
+    if(document.getElementById('t_tile_size').value==='custom'){
+      const tlUnit = inputUnits['t_tile_custom_l'];
+      const twUnit = inputUnits['t_tile_custom_w'];
+      const tl = Number(document.getElementById('t_tile_custom_l').value)||300;
+      const tw = Number(document.getElementById('t_tile_custom_w').value)||300;
+      tileLMm = (tlUnit === 'mm') ? tl : inToMm(tl);
+      tileWMm = (twUnit === 'mm') ? tw : inToMm(tw);
     } else {
-      tbl.innerHTML = '<tr><th>Material</th><th>Quantity</th><th>Unit</th></tr>';
-      tbl.innerHTML += `<tr><td>Area</td><td>${round(m2ToFt2(res.area),3)}</td><td>ft²</td></tr>`;
-      tbl.innerHTML += `<tr><td>Tiles required</td><td>${res.tiles}</td><td>nos</td></tr>`;
-      tbl.innerHTML += `<tr><td>Bedding dry volume</td><td>${round(m3ToFt3(res.dryVol),3)}</td><td>ft³</td></tr>`;
-      tbl.innerHTML += `<tr><td><strong>Cement</strong></td><td><strong>${round(res.cementBags,1)}</strong></td><td><strong>bags (50 kg each)</strong></td></tr>`;
-      tbl.innerHTML += `<tr><td>Sand</td><td>${round(m3ToFt3(res.sandM3),3)}</td><td>ft³</td></tr>`;
-      const waterKg = 0.55 * (res.cementBags*50); const waterL = waterKg;
-      tbl.innerHTML += `<tr><td>Water</td><td>${round(lToGal(waterL),2)}</td><td>gal (${round(lToLb(waterL),2)} lb)</td></tr>`;
+      const v = document.getElementById('t_tile_size').value;
+      const parts = v.split('x').map(Number); tileLMm=parts[0]; tileWMm=parts[1];
     }
+    const tileAreaM2 = (tileLMm/1000) * (tileWMm/1000);
+    
+    const beddingType = document.getElementById('t_bedding_type').value;
+    
+    let adhThM = 0, parts = [1,3];
+    if(beddingType === 'mortar') {
+      const mortarThUnit = inputUnits['t_mortar_th'];
+      const mth = Number(document.getElementById('t_mortar_th').value)||10;
+      adhThM = (mortarThUnit==='mm')? (mth/1000) : (inToMm(mth)/1000);
+      const ratioSel = document.getElementById('t_ratio').value; 
+      parts = (ratioSel==='custom')? parseRatio(document.getElementById('t_ratio_custom').value): parseRatio(ratioSel);
+    }
+    
+    const includeSkirting = document.getElementById('t_skirting').value === 'yes';
+    let skirHM = 0, hasDoor = false, doorWM = 0;
+    if(includeSkirting){
+      const skUnit = inputUnits['t_skir_h'];
+      const skh = Number(document.getElementById('t_skir_h').value)||100;
+      skirHM = (skUnit==='mm')? (skh/1000) : (inToMm(skh)/1000);
+      hasDoor = document.getElementById('t_door_opening').value === 'yes';
+      if(hasDoor){
+        const dwUnit = inputUnits['t_door_w'];
+        const dw = Number(document.getElementById('t_door_w').value)||0.9;
+        doorWM = (dwUnit==='m')? dw : ftToM(dw);
+      }
+    }
+    
+    const wastSel = document.getElementById('t_wastage').value;
+    const wastPercent = (wastSel === 'custom') ? (Number(document.getElementById('t_wastage_custom').value) || 10) : Number(wastSel);
+    
+    const res = tilingFrom(Lm,Wm,tileAreaM2,adhThM,parts,wastPercent, includeSkirting, skirHM, hasDoor, doorWM, beddingType);
+    const out=document.getElementById('tilingResults'); out.innerHTML='';
+    const tbl=document.createElement('table'); tbl.className='results-table';
+    tbl.innerHTML = '<tr><th>Material</th><th>Quantity</th><th>Unit</th></tr>';
+    if(calcUnit==='metric') tbl.innerHTML += `<tr><td>Floor area</td><td>${round(res.area,2)}</td><td>m²</td></tr>`;
+    else tbl.innerHTML += `<tr><td>Floor area</td><td>${round(m2ToFt2(res.area),2)}</td><td>ft²</td></tr>`;
+    tbl.innerHTML += `<tr><td><strong>Tiles needed</strong></td><td><strong>${res.tiles}</strong></td><td><strong>nos</strong></td></tr>`;
+    
+    if(beddingType === 'mortar') {
+      if(calcUnit==='metric') tbl.innerHTML += `<tr><td>Mortar dry volume</td><td>${round(res.dryVol,3)}</td><td>m³</td></tr>`;
+      else tbl.innerHTML += `<tr><td>Mortar dry volume</td><td>${round(m3ToFt3(res.dryVol),3)}</td><td>ft³</td></tr>`;
+      tbl.innerHTML += `<tr><td><strong>Cement</strong></td><td><strong>${round(res.cementBags,1)}</strong></td><td><strong>bags (50 kg each)</strong></td></tr>`;
+      if(calcUnit==='metric') tbl.innerHTML += `<tr><td>Sand</td><td>${round(res.sandM3,3)}</td><td>m³</td></tr>`;
+      else tbl.innerHTML += `<tr><td>Sand</td><td>${round(m3ToFt3(res.sandM3),3)}</td><td>ft³</td></tr>`;
+      const waterKg = 0.6 * (res.cementBags*50); const waterL = waterKg;
+      if(calcUnit==='metric') tbl.innerHTML += `<tr><td>Water</td><td>${round(waterL,2)}</td><td>L (${round(lToLb(waterL),2)} lb)</td></tr>`;
+      else tbl.innerHTML += `<tr><td>Water</td><td>${round(lToGal(waterL),2)}</td><td>gal (${round(lToLb(waterL),2)} lb)</td></tr>`;
+    } else {
+      tbl.innerHTML += `<tr><td><strong>Adhesive</strong></td><td><strong>${round(res.adhesiveKg,1)}</strong></td><td><strong>kg (${round(kgToLb(res.adhesiveKg),1)} lb)</strong></td></tr>`;
+    }
+    
     if(res.skirting){
+      if(calcUnit==='metric') tbl.innerHTML += `<tr><td>Skirting area</td><td>${round(res.skirting.skArea,2)}</td><td>m²</td></tr>`;
+      else tbl.innerHTML += `<tr><td>Skirting area</td><td>${round(m2ToFt2(res.skirting.skArea),2)}</td><td>ft²</td></tr>`;
       tbl.innerHTML += `<tr><td>Skirting tiles</td><td>${res.skirting.skTiles}</td><td>nos</td></tr>`;
     }
     out.appendChild(tbl);
@@ -2300,92 +3798,48 @@ document.getElementById('calcTiling').addEventListener('click', ()=>{
   }catch(err){ showToast('Error: ' + err, 'error'); }
 });
 
-// Painting calc
+// Painting calculate
 document.getElementById('calcPaint').addEventListener('click', ()=>{
   try{
     const lId = 'pa_len', wId = 'pa_w';
     const L = Number(document.getElementById(lId).value); const W = Number(document.getElementById(wId).value);
-    if(!L||!W) throw 'Enter length & width';
+    if(!L||!W) throw 'Enter length and width';
     const calcUnit = getCalculationUnit(lId, wId);
     const lUnit = inputUnits[lId], wUnit = inputUnits[wId];
     const Lm = (lUnit === 'm') ? L : ftToM(L);
     const Wm = (wUnit === 'm') ? W : ftToM(W);
-    const coats = Number(document.getElementById('pa_coats').value)||1; const cov = Number(document.getElementById('pa_cov').value)||10;
-    const area = Lm * Wm; const totalArea = area * coats;
-    const liters = totalArea / cov; const litersW = liters * (1 + 0.02);
-    const out = document.getElementById('paintResults'); out.innerHTML='';
+    const area = Lm * Wm;
+    const coats = Number(document.getElementById('pa_coats').value)||1;
+    const cov = Number(document.getElementById('pa_cov').value)||10;
+    
+    const wastSel = document.getElementById('pa_wastage').value;
+    const wastPercent = (wastSel === 'custom') ? (Number(document.getElementById('pa_wastage_custom').value) || 6) : Number(wastSel);
+    
+    const paintLRaw = (area * coats) / cov;
+    const paintL = paintLRaw * (1 + wastPercent/100);
+    const out=document.getElementById('paintResults'); out.innerHTML='';
     const tbl=document.createElement('table'); tbl.className='results-table';
-    if(calcUnit==='metric'){
-      tbl.innerHTML = '<tr><th>Material</th><th>Quantity</th><th>Unit</th></tr>';
-      tbl.innerHTML += `<tr><td>Area (single coat)</td><td>${round(area,3)}</td><td>m²</td></tr>`;
-      tbl.innerHTML += `<tr><td>Total paint required</td><td>${round(litersW,2)}</td><td>L (${round(lToLb(litersW),2)} lb)</td></tr>`;
-      const thinnerL = litersW * 0.05; tbl.innerHTML += `<tr><td>Thinner (approx)</td><td>${round(thinnerL,2)}</td><td>L (${round(lToLb(thinnerL),2)} lb)</td></tr>`;
-    } else {
-      tbl.innerHTML = '<tr><th>Material</th><th>Quantity</th><th>Unit</th></tr>';
-      tbl.innerHTML += `<tr><td>Area (single coat)</td><td>${round(m2ToFt2(area),3)}</td><td>ft²</td></tr>`;
-      tbl.innerHTML += `<tr><td>Total paint required</td><td>${round(lToGal(litersW),2)}</td><td>gal (${round(lToLb(litersW),2)} lb)</td></tr>`;
-      const thinnerGal = lToGal(litersW*0.05); tbl.innerHTML += `<tr><td>Thinner (approx)</td><td>${round(thinnerGal,2)}</td><td>gal (${round(lToLb(litersW*0.05),2)} lb)</td></tr>`;
-    }
+    tbl.innerHTML = '<tr><th>Material</th><th>Quantity</th><th>Unit</th></tr>';
+    if(calcUnit==='metric') tbl.innerHTML += `<tr><td>Area</td><td>${round(area,2)}</td><td>m²</td></tr>`;
+    else tbl.innerHTML += `<tr><td>Area</td><td>${round(m2ToFt2(area),2)}</td><td>ft²</td></tr>`;
+    tbl.innerHTML += `<tr><td>Coats</td><td>${coats}</td><td>nos</td></tr>`;
+    if(calcUnit==='metric') tbl.innerHTML += `<tr><td><strong>Paint required</strong></td><td><strong>${round(paintL,2)}</strong></td><td><strong>L (${round(lToGal(paintL),2)} gal)</strong></td></tr>`;
+    else tbl.innerHTML += `<tr><td><strong>Paint required</strong></td><td><strong>${round(lToGal(paintL),2)}</strong></td><td><strong>gal (${round(paintL,2)} L)</strong></td></tr>`;
     out.appendChild(tbl);
     showToast('Painting calculation completed!', 'success');
   }catch(err){ showToast('Error: ' + err, 'error'); }
 });
 
-
-
-// Tiling - Door Opening Event Listeners
-(function() {
-  function setupTilingListeners() {
-    const skirting = document.getElementById('t_skirting');
-    if (skirting) {
-      skirting.addEventListener('change', function() {
-        const doorRow = document.getElementById('t_door_row');
-        if (doorRow) {
-          if (this.value === 'yes') {
-            doorRow.classList.remove('hidden');
-          } else {
-            doorRow.classList.add('hidden');
-            const doorWidthRow = document.getElementById('t_door_width_row');
-            if (doorWidthRow) {
-              doorWidthRow.classList.add('hidden');
-            }
-          }
-        }
-      });
-    }
-
-    const doorOpening = document.getElementById('t_door_opening');
-    if (doorOpening) {
-      doorOpening.addEventListener('change', function() {
-        const doorWidthRow = document.getElementById('t_door_width_row');
-        if (doorWidthRow) {
-          if (this.value === 'yes') {
-            doorWidthRow.classList.remove('hidden');
-          } else {
-            doorWidthRow.classList.add('hidden');
-          }
-        }
-      });
-      // Contact
-function handleContact(){ 
-  document.getElementById('cf_status').textContent='Message sent (client-side demo)'; 
-  showToast('Message sent successfully!', 'success');
-  setTimeout(()=>{ document.getElementById('cf_status').textContent=''; document.getElementById('contactForm').reset(); }, 1800); 
+// Contact form
+function handleContact(){
+  const name = document.getElementById('cf_name').value;
+  const email = document.getElementById('cf_email').value;
+  const msg = document.getElementById('cf_msg').value;
+  if(!name||!email||!msg){ document.getElementById('cf_status').textContent='Please fill all fields'; return; }
+  document.getElementById('cf_status').textContent='Message sent (client-side only)!';
+  document.getElementById('contactForm').reset();
+  setTimeout(()=>document.getElementById('cf_status').textContent='', 3000);
 }
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupTilingListeners);
-  } else {
-    setupTilingListeners();
-  }
-})();
-
 </script>
 </body>
 </html>
-
-
-
-
